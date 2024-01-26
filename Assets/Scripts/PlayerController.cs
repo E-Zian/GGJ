@@ -11,10 +11,20 @@ public class PlayerController : MonoBehaviour
     //Weapons stuff
     public Transform pistolWeapon;
     public Transform rifleWeapon;
+    public Transform flamethrowerWeapon;
 
     public List<Transform> rifle;
-
     public List<Transform> shotgun;
+   
+    public GameObject bullet;
+    public GameObject fire;
+
+    //Ammo count stuff
+    public float availableAmmo;
+    public float bulletForce;
+    public float fireForce;
+    public float moveSpeed;
+    public float fireDelay = 0.2f;
     [Tooltip("The bullet decay time for shotgun during normal mode")]
     public float shotgunNormalDecay;
     [Tooltip("The bullet decay time for shotgun during crazy mode")]
@@ -24,25 +34,12 @@ public class PlayerController : MonoBehaviour
     [Tooltip("The bullet decay time for flamethrower during crazy mode")]
     public float flamethrowerCrazyDecay;
 
-
-    public Transform flamethrowerWeapon;
-
-    //Ammo count stuff
-    public float availableAmmo;
-
-    public GameObject bullet;
-    public GameObject fire;
-
-    public float bulletForce;
-    public float fireForce;
-    public float moveSpeed;
-    public float fireDelay = 0.2f;
-
     Vector2 movement;
 
-    string riflePickupString = "RiflePickup";
-    string shotgunPickupString = "ShotgunPickup";
-    string flamethrowerPickupString = "FlamethrowerPickup";
+    string riflePickupTag = "RiflePickup";
+    string shotgunPickupTag = "ShotgunPickup";
+    string flamethrowerPickupTag = "FlamethrowerPickup";
+    string enemyTag = "Enemy";
 
     float fireElapsedTime = 0;
     
@@ -78,19 +75,27 @@ public class PlayerController : MonoBehaviour
     {
         rb.MovePosition(rb.position + movement * moveSpeed);
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag(enemyTag)){
+            //Die
+            Debug.Log("Dead");
+            Destroy(gameObject);
+        }
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag(riflePickupString))
+        if (collision.gameObject.CompareTag(riflePickupTag))
         {
             weaponMode = 1;
             availableAmmo = 50;
         }
-        if (collision.gameObject.CompareTag(shotgunPickupString))
+        if (collision.gameObject.CompareTag(shotgunPickupTag))
         {
             weaponMode = 2;
             availableAmmo = 35;
         }
-        if (collision.gameObject.CompareTag(flamethrowerPickupString))
+        if (collision.gameObject.CompareTag(flamethrowerPickupTag))
         {
             weaponMode = 3;
         }
