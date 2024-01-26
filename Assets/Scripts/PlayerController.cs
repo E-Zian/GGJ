@@ -8,14 +8,23 @@ public class PlayerController : MonoBehaviour
 
     public Rigidbody2D rb;
 
+    //Weapons stuff
     public Transform pistolWeapon;
     public Transform rifleWeapon;
-    public Transform rifle1;
-    public Transform rifle2;
-    public Transform shotgun1;
-    public Transform shotgun2;
-    public Transform shotgun3;
+
+    public List<Transform> rifle;
+
+    public List<Transform> shotgun;
+    [Tooltip("The bullet decay time for shotgun during normal mode")]
+    public float shotgunNormalDecay;
+    [Tooltip("The bullet decay time for shotgun during crazy mode")]
+    public float shotgunCrazyDecay;
+
+
     public Transform flamethrowerWeapon;
+
+    //Ammo count stuff
+    public float availableAmmo;
 
     public GameObject bullet;
     public GameObject shotgunPickup;
@@ -39,7 +48,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        
+        availableAmmo = 0;
     }
     private void Update()
     {
@@ -71,10 +80,12 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag(riflePickupString))
         {
             weaponMode = 1;
+            availableAmmo = 50;
         }
         if (collision.gameObject.CompareTag(shotgunPickupString))
         {
             weaponMode = 2;
+            availableAmmo = 35;
         }
         if (collision.gameObject.CompareTag(flamethrowerPickupString))
         {
@@ -157,13 +168,12 @@ public class PlayerController : MonoBehaviour
             if(isCrazy)
             {
                 fireElapsedTime = 0;
-                GameObject bulletObject1 = Instantiate(bullet, rifle1.position, rifle1.rotation);
-                Rigidbody2D rb1 = bulletObject1.GetComponent<Rigidbody2D>();
-                rb1.AddForce(rifle1.up * bulletForce, ForceMode2D.Impulse);
-
-                GameObject bulletObject2 = Instantiate(bullet, rifle2.position, rifle2.rotation);
-                Rigidbody2D rb2 = bulletObject2.GetComponent<Rigidbody2D>();
-                rb2.AddForce(rifle2.up * bulletForce, ForceMode2D.Impulse);
+                foreach (var item in rifle)
+                {
+                    GameObject bulletObject1 = Instantiate(bullet, item.position, item.rotation);
+                    Rigidbody2D rb1 = bulletObject1.GetComponent<Rigidbody2D>();
+                    rb1.AddForce(item.up * bulletForce, ForceMode2D.Impulse);
+                }
             }
             else
             {
@@ -178,14 +188,34 @@ public class PlayerController : MonoBehaviour
     void ShotgunShooting()
     {
         fireElapsedTime += Time.deltaTime;
-        if (isShoot)
+        if (isShoot && fireElapsedTime >= fireDelay)
         {
-            Shoot();
-        }
-        else if(isShoot && isCrazy && fireElapsedTime >= fireDelay)
-        {
-            fireElapsedTime = 0;
-            Shoot();
+            if (isCrazy)
+            {
+                fireElapsedTime = 0;
+                foreach (var item in shotgun)
+                {
+                    GameObject bulletObject = Instantiate(bullet, item.position, Quaternion.identity);
+                    Rigidbody2D rb = bulletObject.GetComponent<Rigidbody2D>();
+                    rb.AddForce(item.up * bulletForce, ForceMode2D.Impulse);
+                    bulletObject.GetComponent<Bullet>().startDecay(shotgunCrazyDecay);
+
+                }
+            }
+            else
+            {
+                fireElapsedTime = 0;
+
+                foreach (var item in shotgun)
+                {
+                    GameObject bulletObject = Instantiate(bullet, item.position, Quaternion.identity);
+                    Rigidbody2D rb = bulletObject.GetComponent<Rigidbody2D>();
+                    rb.AddForce(item.up * bulletForce, ForceMode2D.Impulse);
+                    bulletObject.GetComponent<Bullet>().startDecay(shotgunNormalDecay);
+
+                }
+            }
+
         }
     }
     void FlamethrowerShooting()

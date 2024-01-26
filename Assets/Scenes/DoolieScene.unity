@@ -669,12 +669,17 @@ MonoBehaviour:
   rb: {fileID: 447081619}
   pistolWeapon: {fileID: 375809899}
   rifleWeapon: {fileID: 1983098021}
-  rifle1: {fileID: 1473351182}
-  rifle2: {fileID: 1282353809}
-  shotgun1: {fileID: 1889155881}
-  shotgun2: {fileID: 828725257}
-  shotgun3: {fileID: 1452746167}
+  rifle:
+  - {fileID: 1473351182}
+  - {fileID: 1282353809}
+  shotgun:
+  - {fileID: 1889155881}
+  - {fileID: 828725257}
+  - {fileID: 1452746167}
+  shotgunNormalDecay: 0.3
+  shotgunCrazyDecay: 0.4
   flamethrowerWeapon: {fileID: 122328873}
+  availableAmmo: 0
   bullet: {fileID: 1345732276045134113, guid: ad6ffe2e62890814ebc6ff2c118ce315, type: 3}
   shotgunPickup: {fileID: 0}
   riflePickup: {fileID: 0}

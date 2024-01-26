@@ -8,4 +8,15 @@ public class Bullet : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    public void startDecay(float decayTime)
+    {
+        StartCoroutine(selfDecay(decayTime));
+    }
+
+    IEnumerator selfDecay(float decayTime)
+    {
+        yield return new WaitForSeconds(decayTime);
+        Destroy(gameObject);
+    }
 }
