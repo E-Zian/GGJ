@@ -19,6 +19,10 @@ public class PlayerController : MonoBehaviour
     public float shotgunNormalDecay;
     [Tooltip("The bullet decay time for shotgun during crazy mode")]
     public float shotgunCrazyDecay;
+    [Tooltip("The bullet decay time for flamethrower during normal mode")]
+    public float flamethrowerNormalDecay;
+    [Tooltip("The bullet decay time for flamethrower during crazy mode")]
+    public float flamethrowerCrazyDecay;
 
 
     public Transform flamethrowerWeapon;
@@ -27,11 +31,10 @@ public class PlayerController : MonoBehaviour
     public float availableAmmo;
 
     public GameObject bullet;
-    public GameObject shotgunPickup;
-    public GameObject riflePickup;
-    public GameObject flamethrowerPickup;
+    public GameObject fire;
 
     public float bulletForce;
+    public float fireForce;
     public float moveSpeed;
     public float fireDelay = 0.2f;
 
@@ -222,7 +225,23 @@ public class PlayerController : MonoBehaviour
     {
         if (isShoot)
         {
-            Shoot();
+            if (isCrazy)
+            {
+                GameObject fireObject = Instantiate(fire, flamethrowerWeapon.position, flamethrowerWeapon.rotation);
+                fireObject.transform.localScale = new Vector3(1, 1, 1);
+                Rigidbody2D rb = fireObject.GetComponent<Rigidbody2D>();
+                rb.AddForce(flamethrowerWeapon.up * fireForce, ForceMode2D.Impulse);
+                fireObject.GetComponent<Bullet>().startDecay(flamethrowerNormalDecay);
+            }
+            else
+            {
+                GameObject fireObject = Instantiate(fire, flamethrowerWeapon.position, flamethrowerWeapon.rotation);
+                fireObject.transform.localScale = new Vector3(0.5f, 0.5f, 1);
+                Rigidbody2D rb = fireObject.GetComponent<Rigidbody2D>();
+                rb.AddForce(flamethrowerWeapon.up * fireForce, ForceMode2D.Impulse);
+                fireObject.GetComponent<Bullet>().startDecay(flamethrowerNormalDecay);
+            }
+            
         }
     }
     
