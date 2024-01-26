@@ -34,6 +34,26 @@ public class PlayerController : MonoBehaviour
     [Tooltip("The bullet decay time for flamethrower during crazy mode")]
     public float flamethrowerCrazyDecay;
 
+<<<<<<< Updated upstream
+=======
+
+    public Transform flamethrowerWeapon;
+
+    //Ammo count stuff
+    public float availableAmmo;
+
+    //Prefabs
+    public GameObject bullet;
+    public GameObject APBullet;
+    public GameObject fire;
+
+    public float bulletForce;
+    public float fireForce;
+    public float moveSpeed;
+    public float shootDelay;
+    public float pistolDelay;
+
+>>>>>>> Stashed changes
     Vector2 movement;
 
     string riflePickupTag = "RiflePickup";
@@ -89,15 +109,19 @@ public class PlayerController : MonoBehaviour
         {
             weaponMode = 1;
             availableAmmo = 50;
+            Destroy(collision.gameObject);
         }
         if (collision.gameObject.CompareTag(shotgunPickupTag))
         {
             weaponMode = 2;
             availableAmmo = 35;
+            Destroy(collision.gameObject);
         }
         if (collision.gameObject.CompareTag(flamethrowerPickupTag))
         {
             weaponMode = 3;
+            availableAmmo = 60;
+            Destroy(collision.gameObject);
         }
     }
     void Inputs()
@@ -160,18 +184,32 @@ public class PlayerController : MonoBehaviour
     }
     void PistolShooting()
     {
-        if (isShoot)
+        fireElapsedTime += Time.deltaTime;
+
+        if (isShoot && fireElapsedTime >= pistolDelay)
         {
-            GameObject bulletObject = Instantiate(bullet, pistolWeapon.position, pistolWeapon.rotation);
-            Rigidbody2D rb = bulletObject.GetComponent<Rigidbody2D>();
-            rb.AddForce(pistolWeapon.up * bulletForce, ForceMode2D.Impulse);
+            if (isCrazy)
+            {
+                fireElapsedTime = 0;
+                GameObject bulletObject = Instantiate(APBullet, pistolWeapon.position, pistolWeapon.rotation);
+                Rigidbody2D rb = bulletObject.GetComponent<Rigidbody2D>();
+                rb.AddForce(pistolWeapon.up * bulletForce, ForceMode2D.Impulse);
+                bulletObject.GetComponent<Bullet>().startDecay(0.4f);
+            }
+            else
+            {
+                fireElapsedTime = 0;
+                GameObject bulletObject = Instantiate(bullet, pistolWeapon.position, pistolWeapon.rotation);
+                Rigidbody2D rb = bulletObject.GetComponent<Rigidbody2D>();
+                rb.AddForce(pistolWeapon.up * bulletForce, ForceMode2D.Impulse);
+            }
         }
     }
     void RifleShooting()
     {
         fireElapsedTime += Time.deltaTime;
 
-        if (isShoot && fireElapsedTime >= fireDelay)
+        if (isShoot && fireElapsedTime >= shootDelay)
         {
             if(isCrazy)
             {
@@ -196,7 +234,7 @@ public class PlayerController : MonoBehaviour
     void ShotgunShooting()
     {
         fireElapsedTime += Time.deltaTime;
-        if (isShoot && fireElapsedTime >= fireDelay)
+        if (isShoot && fireElapsedTime >= shootDelay)
         {
             if (isCrazy)
             {
@@ -249,16 +287,10 @@ public class PlayerController : MonoBehaviour
             
         }
     }
-    
+
     void LookAtMouse()
     {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.up = mousePosition - new Vector2(transform.position.x, transform.position.y);
-    }
-    void Shoot()
-    {
-        //GameObject bulletObject = Instantiate(bullet, weapon.position, weapon.rotation);
-        //Rigidbody2D rb = bulletObject.GetComponent<Rigidbody2D>();
-        //rb.AddForce(weapon.up * bulletForce, ForceMode2D.Impulse);
     }
 }

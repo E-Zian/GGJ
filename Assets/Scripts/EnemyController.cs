@@ -14,7 +14,13 @@ public class EnemyController : MonoBehaviour
     [Tooltip("Please use 0.1 as step reference")]
     public float modifierStep;
 
+    //Pickups Gameobject
+    public GameObject riflePickup;
+    public GameObject shotgunPickup;
+    public GameObject flamethrowerPickup;
+
     private string playerTag = "Player";
+    private string bulletTag = "Bullet";
     private AIDestinationSetter _aIDestinationSetter;
 
     // Start is called before the first frame update
@@ -60,10 +66,25 @@ public class EnemyController : MonoBehaviour
             //Drop RNG
             //Current drop rate is 1/10
             int dropChance = Random.Range(1, 11);
-            if (dropChance == 1)
+            if (dropChance >= 2)
             {
-                //Drop Weapon Box
+                int whatToDrop = Random.Range(1, 4);
+                switch (whatToDrop)
+                {
+                    case 1:
+                        Instantiate(riflePickup, this.transform.position, Quaternion.identity);
+                        break;
+                    case 2:
+                        Instantiate(shotgunPickup, this.transform.position, Quaternion.identity);
+                        break;
+                    case 3:
+                        Instantiate(flamethrowerPickup, this.transform.position, Quaternion.identity);
+                        break;
+                    default:
+                        break;
+                }
             }
+            Destroy(gameObject);
         }
     }
 
@@ -74,6 +95,10 @@ public class EnemyController : MonoBehaviour
             _aIDestinationSetter.target = null;
             //Do player damage here
         }
+        else if (collision.gameObject.CompareTag(bulletTag))
+        {
+            ApplyDamage(10);
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -81,6 +106,14 @@ public class EnemyController : MonoBehaviour
         if (collision.gameObject.CompareTag(playerTag))
         {
             StartCoroutine(restartTracking());
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(bulletTag))
+        {
+            ApplyDamage(10);
         }
     }
 
