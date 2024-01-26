@@ -76,8 +76,22 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag(playerTag))
+        {
+            StartCoroutine(restartTracking());
+        }
+    }
+
     public void ApplyDamage(float damage)
     {
-        health -= damage;
+       health -= damage;
+    }
+
+    IEnumerator restartTracking()
+    {
+        yield return new WaitForSeconds(0.5f);
+        _aIDestinationSetter.target = _player.transform;
     }
 }
