@@ -4,12 +4,22 @@
 TagManager:
   serializedVersion: 2
   tags:
+<<<<<<< Updated upstream
   - Enemy
+=======
+  - ShotgunPickup
+  - RiflePickup
+  - FlamethrowerPickup
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
+<<<<<<< Updated upstream
   - Walls
+=======
+  - Bullet
+>>>>>>> Stashed changes
   - Water
   - UI
   - 
