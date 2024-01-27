@@ -54,24 +54,28 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        Inputs();
-        LookAtMouse();
-        if (weaponMode == 0)
-        {
-            PistolShooting();
+        if (!pause.isPaused) {
+            Inputs();
+            LookAtMouse();
+            if (weaponMode == 0)
+            {
+                PistolShooting();
+            }
+            else if (weaponMode == 1)
+            {
+                RifleShooting();
+            }
+            else if (weaponMode == 2)
+            {
+                ShotgunShooting();
+            }
+            else if (weaponMode == 3)
+            {
+                FlamethrowerShooting();
+            }
         }
-        else if (weaponMode == 1)
-        {
-            RifleShooting();
-        }
-        else if (weaponMode == 2)
-        {
-            ShotgunShooting();
-        }
-        else if(weaponMode == 3)
-        {
-            FlamethrowerShooting();
-        }
+        
+        
     }
     private void FixedUpdate()
     {
