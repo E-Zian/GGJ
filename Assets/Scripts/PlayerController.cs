@@ -11,6 +11,12 @@ public class PlayerController : MonoBehaviour
 
     public Rigidbody2D rb;
 
+    public Image staminaBar;
+    public float stamina, maxStamina;
+    public float runCost = 20f;
+    public Coroutine recharge;
+    public float chargeRate;
+
     //Weapons stuff
     public Transform pistolWeapon;
     public Transform rifleWeapon;
@@ -33,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
     public AudioSource gunClip;
     public AudioSource shotgunClip;
-   
+
     //Ammo count stuff
     public float availableAmmo;
     public TextMeshProUGUI ammoCountText;
@@ -66,7 +72,7 @@ public class PlayerController : MonoBehaviour
     float fireElapsedTime = 0;
     
     bool isShoot;
-
+    bool isSprinting;
     //Crazy System
     public static float crazyDuration = 30f;
     public static bool isCrazy;
@@ -78,6 +84,7 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         availableAmmo = 0;
         isCrazy = false;
+
     }
     private void Update()
     {
@@ -119,8 +126,24 @@ public class PlayerController : MonoBehaviour
             weaponMode = 0;
             ammoCounter.SetActive(false);
         }
-        
-        
+        if(isSprinting && (movement.x != 0 || movement.y != 0))
+        {
+            moveSpeed = 0.15f;
+            stamina -= runCost * Time.deltaTime;
+            if (stamina < 0)
+            {
+                stamina = 0;
+                moveSpeed = 0.05f;
+            }
+            staminaBar.fillAmount = stamina / maxStamina;
+            if(recharge != null)StopCoroutine(recharge);
+            recharge = StartCoroutine(RechargeStamina());
+        }
+        else
+        {
+            moveSpeed = 0.05f;
+        }
+      
     }
     private void FixedUpdate()
     {
@@ -165,11 +188,19 @@ public class PlayerController : MonoBehaviour
             Destroy(collision.gameObject);
         }
     }
+   
     void Inputs()
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (Input.GetKeyDown(KeyCode.LeftShift)){
+            isSprinting = true;
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            isSprinting = false;
+        }
         //Enter Crazy Mode
         if (Input.GetKeyDown("space") && crazyMeter.clownMeterValue >= 100.0f)
         {
@@ -366,6 +397,17 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
         
+    }
+    IEnumerator RechargeStamina()
+    {
+        yield return new WaitForSeconds(1f);
+        while(stamina < maxStamina)
+        {
+            stamina += chargeRate / 10f;
+            if (stamina > maxStamina) stamina = maxStamina;
+            staminaBar.fillAmount = stamina / maxStamina;
+            yield return new WaitForSeconds(.1f);
+        }
     }
     //void LookAtMouse()
     //{
