@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public List<Transform> shotgun;
    
     public GameObject bullet;
+    public GameObject APBullet;
     public GameObject fire;
 
     //Ammo count stuff
@@ -24,7 +25,8 @@ public class PlayerController : MonoBehaviour
     public float bulletForce;
     public float fireForce;
     public float moveSpeed;
-    public float fireDelay = 0.2f;
+    public float shootDelay;
+    public float pistolDelay;
     [Tooltip("The bullet decay time for shotgun during normal mode")]
     public float shotgunNormalDecay;
     [Tooltip("The bullet decay time for shotgun during crazy mode")]
@@ -34,26 +36,6 @@ public class PlayerController : MonoBehaviour
     [Tooltip("The bullet decay time for flamethrower during crazy mode")]
     public float flamethrowerCrazyDecay;
 
-<<<<<<< Updated upstream
-=======
-
-    public Transform flamethrowerWeapon;
-
-    //Ammo count stuff
-    public float availableAmmo;
-
-    //Prefabs
-    public GameObject bullet;
-    public GameObject APBullet;
-    public GameObject fire;
-
-    public float bulletForce;
-    public float fireForce;
-    public float moveSpeed;
-    public float shootDelay;
-    public float pistolDelay;
-
->>>>>>> Stashed changes
     Vector2 movement;
 
     string riflePickupTag = "RiflePickup";
