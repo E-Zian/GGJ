@@ -133,7 +133,7 @@ MonoBehaviour:
   radius: 0.53
   height: 0.01
   canMove: 1
-  maxSpeed: 0.8
+  maxSpeed: 1
   gravity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
@@ -187,7 +187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 5256911781357788575, guid: a14401e8d2450184d889fa63c05fb3b8, type: 3}
   enemy: {fileID: 496463865509792649}
-  moveSpeed: 2
+  moveSpeed: 1.4
   health: 0
   healthModifier: 0
   maxHealth: 100
