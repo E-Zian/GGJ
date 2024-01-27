@@ -9,7 +9,8 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
-        AudioSource bgm = GetComponent<AudioSource>();    
+        AudioSource bgm = GetComponent<AudioSource>();  
+        bgm.loop = true;
         bgm.Play();
     }
     public void StartGame()

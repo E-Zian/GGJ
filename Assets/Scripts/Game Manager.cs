@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     {
         remainingEnemyAmt = startingEnemyAmt = enemyAmount;
         activeSpawners = spawners;
+        bgm.loop = true;
         bgm.Play();
     }
 
