@@ -162,7 +162,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag(flamethrowerPickupTag))
         {
             weaponMode = 3;
-            availableAmmo = 1000;
+            availableAmmo = 300;
             ammoCounter.SetActive(true);
             Destroy(collision.gameObject);
         }

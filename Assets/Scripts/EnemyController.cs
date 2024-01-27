@@ -165,7 +165,7 @@ public class EnemyController : MonoBehaviour
     {
         while (isOnFire)
         {
-            ApplyDamage(50);
+            ApplyDamage(100);
             yield return new WaitForSeconds(1f);
         }
     }
