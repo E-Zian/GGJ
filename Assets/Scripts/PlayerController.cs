@@ -29,6 +29,10 @@ public class PlayerController : MonoBehaviour
     public GameObject fire;
 
     private SpriteRenderer spriteRenderer;
+
+    public AudioSource gunClip;
+    public AudioSource shotgunClip;
+   
     //Ammo count stuff
     public float availableAmmo;
     public TextMeshProUGUI ammoCountText;
@@ -78,16 +82,20 @@ public class PlayerController : MonoBehaviour
             {
                 spriteRenderer.sprite = pistolMode;
                 PistolShooting();
+                
+                
             }
             else if (weaponMode == 1)
             {
-                spriteRenderer.sprite = pistolMode;
+                spriteRenderer.sprite = rifleMode;
                 RifleShooting();
+    
             }
             else if (weaponMode == 2)
             {
                 spriteRenderer.sprite = shotgunMode;
                 ShotgunShooting();
+                
             }
             else if (weaponMode == 3)
             {
@@ -211,18 +219,21 @@ public class PlayerController : MonoBehaviour
 
         if (isShoot && fireElapsedTime >= pistolDelay)
         {
+            
             if (isCrazy)
             {
                 fireElapsedTime = 0;
                 GameObject bulletObject = Instantiate(APBullet, pistolWeapon.position, pistolWeapon.rotation);
                 Rigidbody2D rb = bulletObject.GetComponent<Rigidbody2D>();
                 rb.AddForce(pistolWeapon.up * bulletForce, ForceMode2D.Impulse);
+                gunClip.Play();
                 bulletObject.GetComponent<Bullet>().startDecay(0.4f);
             }
             else
             {
                 fireElapsedTime = 0;
                 GameObject bulletObject = Instantiate(bullet, pistolWeapon.position, pistolWeapon.rotation);
+                gunClip.Play();
                 Rigidbody2D rb = bulletObject.GetComponent<Rigidbody2D>();
                 rb.AddForce(pistolWeapon.up * bulletForce, ForceMode2D.Impulse);
             }
@@ -231,15 +242,17 @@ public class PlayerController : MonoBehaviour
     void RifleShooting()
     {
         fireElapsedTime += Time.deltaTime;
-
+        
         if (isShoot && fireElapsedTime >= shootDelay)
         {
-            if(isCrazy)
+            
+            if (isCrazy)
             {
                 fireElapsedTime = 0;
                 foreach (var item in rifle)
                 {
                     GameObject bulletObject1 = Instantiate(bullet, item.position, item.rotation);
+                    gunClip.Play();
                     Rigidbody2D rb1 = bulletObject1.GetComponent<Rigidbody2D>();
                     rb1.AddForce(item.up * bulletForce, ForceMode2D.Impulse);
                     availableAmmo--;
@@ -249,6 +262,7 @@ public class PlayerController : MonoBehaviour
             {
                 fireElapsedTime = 0;
                 GameObject bulletObject = Instantiate(bullet, rifleWeapon.position, rifleWeapon.rotation);
+                gunClip.Play();
                 Rigidbody2D rb = bulletObject.GetComponent<Rigidbody2D>();
                 rb.AddForce(rifleWeapon.up * bulletForce, ForceMode2D.Impulse);
                 availableAmmo--;
@@ -261,12 +275,14 @@ public class PlayerController : MonoBehaviour
         fireElapsedTime += Time.deltaTime;
         if (isShoot && fireElapsedTime >= shootDelay)
         {
+            
             if (isCrazy)
             {
                 fireElapsedTime = 0;
                 foreach (var item in shotgun)
                 {
                     GameObject bulletObject = Instantiate(bullet, item.position, Quaternion.identity);
+                    shotgunClip.Play();
                     Rigidbody2D rb = bulletObject.GetComponent<Rigidbody2D>();
                     rb.AddForce(item.up * bulletForce, ForceMode2D.Impulse);
                     bulletObject.GetComponent<Bullet>().startDecay(shotgunCrazyDecay);
@@ -280,7 +296,9 @@ public class PlayerController : MonoBehaviour
 
                 foreach (var item in shotgun)
                 {
+
                     GameObject bulletObject = Instantiate(bullet, item.position, Quaternion.identity);
+                    shotgunClip.Play();
                     Rigidbody2D rb = bulletObject.GetComponent<Rigidbody2D>();
                     rb.AddForce(item.up * bulletForce, ForceMode2D.Impulse);
                     bulletObject.GetComponent<Bullet>().startDecay(shotgunNormalDecay);
@@ -293,8 +311,10 @@ public class PlayerController : MonoBehaviour
     }
     void FlamethrowerShooting()
     {
+        
         if (isShoot)
         {
+            
             if (isCrazy)
             {
                 GameObject fireObject = Instantiate(fire, flamethrowerWeapon.position, flamethrowerWeapon.rotation);
@@ -305,6 +325,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
+         
                 GameObject fireObject = Instantiate(fire, flamethrowerWeapon.position, flamethrowerWeapon.rotation);
                 fireObject.transform.localScale = new Vector3(0.5f, 0.5f, 1);
                 Rigidbody2D rb = fireObject.GetComponent<Rigidbody2D>();

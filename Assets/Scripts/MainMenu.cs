@@ -6,6 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+
+    private void Start()
+    {
+        AudioSource bgm = GetComponent<AudioSource>();    
+        bgm.Play();
+    }
     public void StartGame()
     {
         SceneManager.LoadScene(1);

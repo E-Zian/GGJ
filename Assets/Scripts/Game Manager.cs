@@ -16,13 +16,15 @@ public class GameManager : MonoBehaviour
     public float maxSpawnedEnemy;
     public int enemySpawnGroupSize;
     public GameObject enemy;
-    
+
+    public AudioSource bgm;
 
     // Start is called before the first frame update
     void Start()
     {
         remainingEnemyAmt = startingEnemyAmt = enemyAmount;
         activeSpawners = spawners;
+        bgm.Play();
     }
 
     // Update is called once per frame

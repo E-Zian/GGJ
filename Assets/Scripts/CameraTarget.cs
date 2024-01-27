@@ -11,10 +11,12 @@ public class CameraTarget : MonoBehaviour
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 targetPos = (player.position + mousePos) / 2f;
-
-        targetPos.x = Mathf.Clamp(targetPos.x, -threshold + player.position.x, threshold + player.position.x);
-        targetPos.y = Mathf.Clamp(targetPos.y, -threshold + player.position.y, threshold + player.position.y);
-        targetPos.z = -10;
-        this.transform.position = targetPos;
+        if (!pause.isPaused) {
+            targetPos.x = Mathf.Clamp(targetPos.x, -threshold + player.position.x, threshold + player.position.x);
+            targetPos.y = Mathf.Clamp(targetPos.y, -threshold + player.position.y, threshold + player.position.y);
+            targetPos.z = -10;
+            this.transform.position = targetPos;
+        }
+        
     }
 }
