@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     public GameObject bullet;
     public GameObject APBullet;
     public GameObject fire;
+    public GameObject gameOver;
 
     private SpriteRenderer spriteRenderer;
 
@@ -92,7 +93,7 @@ public class PlayerController : MonoBehaviour
             else if (weaponMode == 1)
             {
                 spriteRenderer.sprite = rifleMode;
-                RifleShooting();
+                RifleShooting();    
     
             }
             else if (weaponMode == 2)
@@ -135,6 +136,8 @@ public class PlayerController : MonoBehaviour
             {
                 //Die
                 Debug.Log("Dead");
+                Time.timeScale = 0f;
+                gameOver.SetActive(true);
                 Destroy(gameObject);
             }
         }
