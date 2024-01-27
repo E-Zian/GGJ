@@ -54048,7 +54048,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c62ed8dc26ad414b94a0c55c03813b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyAmount: 202
+  enemyAmount: 2000
   enemiesLeftText: {fileID: 715608576}
   spawners:
   - {fileID: 1055144438}
@@ -54078,6 +54078,7 @@ MonoBehaviour:
   killToSpawnSpecial: 500
   finalEnemies: []
   finalEnemiesCount: 0
+  inFinalStage: 0
   enemy: {fileID: 496463865509792649, guid: 23bfd522b10ea8a46a4624d2d4c08f3d, type: 3}
   fatEnemy: {fileID: 7195637630327472470, guid: 2a4b9e69f36e32040bfffa3957611ef6, type: 3}
   runnerEnemy: {fileID: 6929570954489811840, guid: b79364625384d4244a531d2beadf3335, type: 3}
