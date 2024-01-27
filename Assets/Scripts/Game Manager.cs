@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
 
     //Enemy Spawn & Spawners
     public List<GameObject> spawners;
+    public List<GameObject> finalSpawners;
     public static List<GameObject> activeSpawners;
     public static float currentSpawnedEnemy;
     public float maxSpawnedEnemy;
@@ -23,6 +24,8 @@ public class GameManager : MonoBehaviour
     public int enemySpawnGroupSize;
     public int specialCounter;
     public int killToSpawnSpecial;
+    public GameObject[] finalEnemies;
+    public float finalEnemiesCount;
 
     //Prefabs
     public GameObject enemy;
@@ -37,6 +40,12 @@ public class GameManager : MonoBehaviour
     //Post-processing
     public GameObject postVolume;
 
+    //Object pools
+    public static List<GameObject> droppedWeaponPool;
+
+    //Strings
+    private string enemyTag = "Enemy";
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,12 +57,13 @@ public class GameManager : MonoBehaviour
         specialCounter = 0;
         runOnce = false;
         maxSpawnedEnemy = maxEnemyNormal;
+        droppedWeaponPool = new List<GameObject>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (currentSpawnedEnemy < maxSpawnedEnemy && remainingEnemyAmt > 0)
+        if (currentSpawnedEnemy < maxSpawnedEnemy && remainingEnemyAmt > 200)
         {
             //Spawn point selection
             int randomSpawn = Random.Range(0, activeSpawners.Count);     
@@ -80,11 +90,51 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-        if(remainingEnemyAmt <= 0)
+        if (remainingEnemyAmt <= 200 && remainingEnemyAmt > 100)
+        {
+            //Spawn point selection
+            int randomSpawn = Random.Range(0, finalSpawners.Count);
+            Instantiate(enemy, finalSpawners[randomSpawn].transform.position, Quaternion.identity);
+            remainingEnemyAmt--;
+        }
+        if (remainingEnemyAmt <= 100 && remainingEnemyAmt > 0)
+        {
+            int randomSpawn = Random.Range(0, finalSpawners.Count);
+            int randomBoss = Random.Range(1, 3);
+            if (randomBoss == 1)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    Instantiate(fatEnemy, finalSpawners[randomSpawn].transform.position, Quaternion.identity);
+                }
+            }
+            else if (randomBoss == 2)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    Instantiate(runnerEnemy, finalSpawners[randomSpawn].transform.position, Quaternion.identity);
+                }
+            }
+            remainingEnemyAmt--;
+        }
+        if (remainingEnemyAmt <= 0 && finalEnemiesCount <= 0)
+        {
+            finalEnemies = GameObject.FindGameObjectsWithTag(enemyTag);
+            foreach (var item in finalEnemies)
+            {
+                finalEnemiesCount++;
+            }
+            enemiesLeftText.text = finalEnemiesCount.ToString();
+        }
+        if (finalEnemiesCount <= 0)
         {
             SceneManager.LoadScene("GameEndingScene");
         }
-        enemiesLeftText.text = remainingEnemyAmt.ToString();
+        if (remainingEnemyAmt > 0)
+        {
+            enemiesLeftText.text = remainingEnemyAmt.ToString();
+        }
+
 
         //Player Crazy Mode
         if (PlayerController.isCrazy)
@@ -97,6 +147,12 @@ public class GameManager : MonoBehaviour
                 runOnce = true;
             }
         }
+        if (droppedWeaponPool.Count > 5)
+        {
+            Destroy(droppedWeaponPool[0].gameObject);
+            droppedWeaponPool.RemoveAt(0);
+        }
+        Debug.Log(droppedWeaponPool.Count);
     }
 
     IEnumerator crazyMode()

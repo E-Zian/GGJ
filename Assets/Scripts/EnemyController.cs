@@ -32,6 +32,9 @@ public class EnemyController : MonoBehaviour
     private string fireBulletTag = "FireBullet";
     private AIDestinationSetter _aIDestinationSetter;
 
+    //GameObject
+    public GameObject pickups;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -74,19 +77,22 @@ public class EnemyController : MonoBehaviour
             //Drop RNG
             //Current drop rate is 1/10
             float dropChance = Random.Range(1.0f, 11.0f);
-            if (dropChance <= 3f)
+            if (dropChance <= 8f)
             {
                 int whatToDrop = Random.Range(1, 4);
                 switch (whatToDrop)
                 {
                     case 1:
-                        Instantiate(riflePickup, new Vector3(this.transform.position.x, this.transform.position.y, 0), Quaternion.identity);
+                        pickups = Instantiate(riflePickup, new Vector3(this.transform.position.x, this.transform.position.y, 0), Quaternion.identity);
+                        GameManager.droppedWeaponPool.Add(pickups);
                         break;
                     case 2:
-                        Instantiate(shotgunPickup, new Vector3(this.transform.position.x, this.transform.position.y, 0), Quaternion.identity);
+                        pickups = Instantiate(shotgunPickup, new Vector3(this.transform.position.x, this.transform.position.y, 0), Quaternion.identity);
+                        GameManager.droppedWeaponPool.Add(pickups);
                         break;
                     case 3:
-                        Instantiate(flamethrowerPickup, new Vector3(this.transform.position.x, this.transform.position.y, 0), Quaternion.identity);
+                        pickups = Instantiate(flamethrowerPickup, new Vector3(this.transform.position.x, this.transform.position.y, 0), Quaternion.identity);
+                        GameManager.droppedWeaponPool.Add(pickups);
                         break;
                     default:
                         break;
@@ -96,7 +102,7 @@ public class EnemyController : MonoBehaviour
             GameManager.remainingEnemyAmt--;
             if (!PlayerController.isCrazy)
             {
-                crazyMeter.clownMeterValue += 2;
+                crazyMeter.clownMeterValue += 100;
             }
             Destroy(gameObject);
         }
@@ -142,7 +148,14 @@ public class EnemyController : MonoBehaviour
 
     public void ApplyDamage(float damage)
     {
-       health -= damage;
+        if (PlayerController.isCrazy)
+        {
+            health -= 1000;
+        }
+        else
+        {
+            health -= damage;
+        }
     }
 
     IEnumerator restartTracking()

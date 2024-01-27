@@ -189,7 +189,7 @@ MonoBehaviour:
   _player: {fileID: 5256911781357788575, guid: a14401e8d2450184d889fa63c05fb3b8, type: 3}
   enemy: {fileID: 496463865509792649}
   moveSpeed: 1.4
-  crazyMoveSpeed: 2
+  crazyMoveSpeed: 1.4
   health: 0
   healthModifier: 0
   maxHealth: 100
@@ -200,6 +200,7 @@ MonoBehaviour:
   bulletDamage: 50
   isOnFire: 0
   fireDoTDecay: 10
+  pickups: {fileID: 0}
 --- !u!58 &3259902322429313983
 CircleCollider2D:
   m_ObjectHideFlags: 0

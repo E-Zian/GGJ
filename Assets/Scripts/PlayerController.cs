@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
     public float fireForce;
     public float moveSpeed;
     public float shootDelay;
+    public float shotgunDelay;
     public float pistolDelay;
     [Tooltip("The bullet decay time for shotgun during normal mode")]
     public float shotgunNormalDecay;
@@ -130,18 +131,15 @@ public class PlayerController : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!isCrazy)
+        if (collision.gameObject.CompareTag(enemyTag))
         {
-            if (collision.gameObject.CompareTag(enemyTag))
-            {
-                //Die
-                Debug.Log("Dead");
-                Time.timeScale = 0f;
-                gameOver.SetActive(true);
-                Destroy(gameObject);
-            }
+            //Die
+            Debug.Log("Dead");
+            Time.timeScale = 0f;
+            gameOver.SetActive(true);
+            Destroy(gameObject);
         }
-        
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -292,7 +290,7 @@ public class PlayerController : MonoBehaviour
     void ShotgunShooting()
     {
         fireElapsedTime += Time.deltaTime;
-        if (isShoot && fireElapsedTime >= shootDelay)
+        if (isShoot && fireElapsedTime >= shotgunDelay)
         {
             
             if (isCrazy)
