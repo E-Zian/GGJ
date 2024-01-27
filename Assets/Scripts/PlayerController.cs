@@ -14,6 +14,11 @@ public class PlayerController : MonoBehaviour
     public Transform rifleWeapon;
     public Transform flamethrowerWeapon;
 
+    public Sprite pistolMode;
+    public Sprite rifleMode;
+    public Sprite shotgunMode;
+    public Sprite flamethrowerMode;
+
     public List<Transform> rifle;
     public List<Transform> shotgun;
    
@@ -21,6 +26,7 @@ public class PlayerController : MonoBehaviour
     public GameObject APBullet;
     public GameObject fire;
 
+    public SpriteRenderer spriteRenderer;
     //Ammo count stuff
     public float availableAmmo;
     public float bulletForce;
@@ -62,18 +68,22 @@ public class PlayerController : MonoBehaviour
            
             if (weaponMode == 0)
             {
+                spriteRenderer.sprite = pistolMode;
                 PistolShooting();
             }
             else if (weaponMode == 1)
             {
+                spriteRenderer.sprite = pistolMode;
                 RifleShooting();
             }
             else if (weaponMode == 2)
             {
+                spriteRenderer.sprite = shotgunMode;
                 ShotgunShooting();
             }
             else if (weaponMode == 3)
             {
+                spriteRenderer.sprite = flamethrowerMode;
                 FlamethrowerShooting();
             }
         }
