@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemiesLeft = 5000;
         remainingEnemyAmt = startingEnemyAmt = enemyAmount;
         activeSpawners = spawners;
         bgm.loop = true;
@@ -45,6 +44,10 @@ public class GameManager : MonoBehaviour
             Instantiate(enemy, activeSpawners[randomSpawn].transform.position, Quaternion.identity);
             currentSpawnedEnemy++;
         }
-        enemiesLeftText.text = enemiesLeft.ToString();
+        if(remainingEnemyAmt <= 0)
+        {
+            //CHANGE SCENE
+        }
+        enemiesLeftText.text = remainingEnemyAmt.ToString();
     }
 }

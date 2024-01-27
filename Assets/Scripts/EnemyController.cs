@@ -95,7 +95,7 @@ public class EnemyController : MonoBehaviour
             PlayerController.crazyCharge += 0.01f;
             GameManager.currentSpawnedEnemy--;
             Destroy(gameObject);
-            GameManager.enemiesLeft--;
+            GameManager.remainingEnemyAmt--;
         }
     }
 
