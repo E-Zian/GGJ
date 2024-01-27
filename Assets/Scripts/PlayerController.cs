@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
     public static bool isCrazy;
 
     public GameObject ammoCounter;
-
+    public AudioSource doomMusic;
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -173,6 +173,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown("space") && crazyMeter.clownMeterValue >= 100.0f)
         {
             isCrazy = true;
+            doomMusic.Play();
             crazyMeter.clownMeterValue = 0;
             StartCoroutine(crazyMode());
             Debug.Log("Crazy");
@@ -351,6 +352,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator crazyMode()
     {
+        
         yield return new WaitForSeconds(crazyDuration);
         isCrazy = false;
     }

@@ -28,11 +28,11 @@ public class crazyMeter : MonoBehaviour
         else if (clownMeterValue < 50) {
             Clownborder.clownStatus = 1;
         }
-        else if (clownMeterValue < 75)
+        else if (clownMeterValue < 99)
         {
             Clownborder.clownStatus = 2;
         }
-        else if (clownMeterValue <= 100)
+        else if (clownMeterValue >= 100)
         {
             Clownborder.clownStatus = 3;
         }
