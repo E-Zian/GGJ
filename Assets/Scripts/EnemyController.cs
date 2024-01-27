@@ -94,7 +94,10 @@ public class EnemyController : MonoBehaviour
             }
             GameManager.currentSpawnedEnemy--;
             GameManager.remainingEnemyAmt--;
-            crazyMeter.clownMeterValue+= 2;
+            if (!PlayerController.isCrazy)
+            {
+                crazyMeter.clownMeterValue += 2;
+            }
             Destroy(gameObject);
         }
 
