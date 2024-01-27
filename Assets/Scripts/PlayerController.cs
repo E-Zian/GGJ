@@ -209,7 +209,6 @@ public class PlayerController : MonoBehaviour
             //crazyMeter.clownMeterValue = 0;
             StartCoroutine(crazyMode());
             StartCoroutine(crazyBarReset());
-            Debug.Log("Crazy");
         } 
 
         //if not crazy

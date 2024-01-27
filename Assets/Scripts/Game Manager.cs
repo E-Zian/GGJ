@@ -48,6 +48,9 @@ public class GameManager : MonoBehaviour
     //Strings
     private string enemyTag = "Enemy";
 
+    //Sound
+    public AudioSource bgmAudio;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -167,10 +170,12 @@ public class GameManager : MonoBehaviour
 
     IEnumerator crazyMode()
     {
+        bgmAudio.mute = true;
         yield return new WaitForSeconds(PlayerController.crazyDuration - 10);
         maxSpawnedEnemy = maxEnemyNormal;
         yield return new WaitForSeconds(10f);
         postVolume.SetActive(false);
+        bgmAudio.mute = false;
         runOnce = false;
     }
 }
