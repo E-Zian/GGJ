@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public int killToSpawnSpecial;
     public GameObject[] finalEnemies;
     public float finalEnemiesCount;
+    public bool inFinalStage;
 
     //Prefabs
     public GameObject enemy;
@@ -56,6 +57,7 @@ public class GameManager : MonoBehaviour
         bgm.Play();
         specialCounter = 0;
         runOnce = false;
+        inFinalStage = false;
         maxSpawnedEnemy = maxEnemyNormal;
         droppedWeaponPool = new List<GameObject>();
     }
@@ -119,6 +121,7 @@ public class GameManager : MonoBehaviour
         }
         if (remainingEnemyAmt <= 0 && finalEnemiesCount <= 0)
         {
+            inFinalStage = true;
             finalEnemies = GameObject.FindGameObjectsWithTag(enemyTag);
             foreach (var item in finalEnemies)
             {
@@ -126,7 +129,7 @@ public class GameManager : MonoBehaviour
             }
             enemiesLeftText.text = finalEnemiesCount.ToString();
         }
-        if (finalEnemiesCount <= 0)
+        if (finalEnemiesCount <= 0 && inFinalStage)
         {
             SceneManager.LoadScene("GameEndingScene");
         }

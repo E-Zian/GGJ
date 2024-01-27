@@ -102,7 +102,7 @@ public class EnemyController : MonoBehaviour
             GameManager.remainingEnemyAmt--;
             if (!PlayerController.isCrazy)
             {
-                crazyMeter.clownMeterValue += 100;
+                crazyMeter.clownMeterValue += 2;
             }
             Destroy(gameObject);
         }
