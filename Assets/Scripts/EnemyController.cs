@@ -78,7 +78,7 @@ public class EnemyController : MonoBehaviour
             //Drop RNG
             //Current drop rate is 1/10
             float dropChance = Random.Range(1.0f, 11.0f);
-            if (dropChance <= 8f)
+            if (dropChance <= 3f)
             {
                 int whatToDrop = Random.Range(1, 4);
                 switch (whatToDrop)
