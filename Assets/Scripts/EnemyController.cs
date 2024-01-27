@@ -94,6 +94,7 @@ public class EnemyController : MonoBehaviour
             }
             PlayerController.crazyCharge += 0.01f;
             GameManager.currentSpawnedEnemy--;
+            crazyMeter.clownMeterValue++;
             Destroy(gameObject);
             GameManager.remainingEnemyAmt--;
         }

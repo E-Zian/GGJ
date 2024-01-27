@@ -118,10 +118,7 @@ public class PlayerController : MonoBehaviour
             weaponMode = 0;
             ammoCounter.SetActive(false);
         }
-        if (crazyCircleFill.gameObject.activeInHierarchy)
-        {
-            crazyCircleFill.fillAmount = crazyCharge;
-        }
+        
         
     }
     private void FixedUpdate()
