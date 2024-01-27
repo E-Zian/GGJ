@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class crazyMeter : MonoBehaviour
 {
-    public static int clownMeterValue = 0;
+    public static float clownMeterValue = 0;
     private Slider slider;
     void Start()
     {

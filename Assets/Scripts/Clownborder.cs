@@ -24,13 +24,22 @@ public class Clownborder : MonoBehaviour
         {
 
             case 0:
-            Border.sprite = low;
+                if (!PlayerController.isCrazy) {
+                    Border.sprite = low;
+                }
+            
                 break;
             case 1:
-                Border.sprite = medium;
+                if (!PlayerController.isCrazy)
+                {
+                    Border.sprite = medium;
+                }
                 break;
             case 2:
-                Border.sprite = high;
+                if (!PlayerController.isCrazy)
+                {
+                    Border.sprite = high;
+                }
                 break;
             case 3:
                 Border.sprite = full;

@@ -177,8 +177,9 @@ public class PlayerController : MonoBehaviour
         {
             isCrazy = true;
             doomMusic.Play();
-            crazyMeter.clownMeterValue = 0;
+            //crazyMeter.clownMeterValue = 0;
             StartCoroutine(crazyMode());
+            StartCoroutine(crazyBarReset());
             Debug.Log("Crazy");
         } 
 
@@ -359,7 +360,15 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(crazyDuration);
         isCrazy = false;
     }
+    IEnumerator crazyBarReset() {
+        while(crazyMeter.clownMeterValue > 0)
+        {
 
+            crazyMeter.clownMeterValue -= 100/crazyDuration * Time.deltaTime;
+            yield return null;
+        }
+        
+    }
     //void LookAtMouse()
     //{
     //    Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
