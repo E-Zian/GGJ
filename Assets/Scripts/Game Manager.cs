@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         remainingEnemyAmt = startingEnemyAmt = enemyAmount;
+        currentSpawnedEnemy = 0;
         activeSpawners = spawners;
         bgm.loop = true;
         bgm.Play();
@@ -64,11 +65,17 @@ public class GameManager : MonoBehaviour
                 int randomBoss = Random.Range(1, 3);
                 if (randomBoss == 1)
                 {
-                    Instantiate(fatEnemy, activeSpawners[randomSpawn].transform.position, Quaternion.identity);
+                    for (int i = 0; i < 3; i++)
+                    {
+                        Instantiate(fatEnemy, activeSpawners[randomSpawn].transform.position, Quaternion.identity);
+                    }
                 }
                 else if (randomBoss == 2)
                 {
-                    Instantiate(runnerEnemy, activeSpawners[randomSpawn].transform.position, Quaternion.identity);
+                    for (int i = 0; i < 3; i++)
+                    {
+                        Instantiate(runnerEnemy, activeSpawners[randomSpawn].transform.position, Quaternion.identity);
+                    }
                 }
             }
         }

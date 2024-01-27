@@ -724,7 +724,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 4.5
 --- !u!114 &350003413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1104,7 +1104,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 4.5
 --- !u!114 &517428085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1768,7 +1768,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 4.5
 --- !u!114 &817114619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2302,7 +2302,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 4.5
 --- !u!114 &1055144441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2382,7 +2382,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 4.5
 --- !u!114 &1087469840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2455,6 +2455,10 @@ PrefabInstance:
       propertyPath: ammoCounter
       value: 
       objectReference: {fileID: 788665069}
+    - target: {fileID: 3275541338602337834, guid: a14401e8d2450184d889fa63c05fb3b8, type: 3}
+      propertyPath: pistolDelay
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3275541338602337834, guid: a14401e8d2450184d889fa63c05fb3b8, type: 3}
       propertyPath: ammoCountText
       value: 
@@ -2539,7 +2543,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 4.5
 --- !u!114 &1108316424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2923,7 +2927,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 4.5
 --- !u!114 &1237643703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3003,7 +3007,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 4.5
 --- !u!114 &1298958836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3083,7 +3087,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 4.5
 --- !u!114 &1334543285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3419,7 +3423,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 4.5
 --- !u!114 &1426409655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51191,7 +51195,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 4.5
 --- !u!114 &1727196571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51405,7 +51409,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 4.5
 --- !u!114 &1767592938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51485,7 +51489,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 4.5
 --- !u!114 &1894798732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53667,7 +53671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c62ed8dc26ad414b94a0c55c03813b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyAmount: 5000
+  enemyAmount: 2000
   enemiesLeftText: {fileID: 715608576}
   spawners:
   - {fileID: 1055144438}
@@ -53689,7 +53693,7 @@ MonoBehaviour:
   maxEnemyCrazy: 150
   enemySpawnGroupSize: 0
   specialCounter: 0
-  killToSpawnSpecial: 1000
+  killToSpawnSpecial: 500
   enemy: {fileID: 496463865509792649, guid: 23bfd522b10ea8a46a4624d2d4c08f3d, type: 3}
   fatEnemy: {fileID: 7195637630327472470, guid: 2a4b9e69f36e32040bfffa3957611ef6, type: 3}
   runnerEnemy: {fileID: 6929570954489811840, guid: b79364625384d4244a531d2beadf3335, type: 3}
@@ -54008,7 +54012,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 4.5
 --- !u!114 &2013121007
 MonoBehaviour:
   m_ObjectHideFlags: 0

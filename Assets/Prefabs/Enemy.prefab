@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1381870661151610823}
   - component: {fileID: 3259902322429313983}
   - component: {fileID: 7299838314621952355}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -153,9 +153,9 @@ MonoBehaviour:
   targetCompatibility: {fileID: 0}
   maxAcceleration: -2.5
   rotationSpeed: 360
-  slowdownDistance: 0.4
-  pickNextWaypointDist: 0.5
-  endReachedDistance: 0.2
+  slowdownDistance: 0.5
+  pickNextWaypointDist: 0.3
+  endReachedDistance: 0.4
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
@@ -258,7 +258,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
