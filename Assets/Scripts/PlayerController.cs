@@ -48,10 +48,6 @@ public class PlayerController : MonoBehaviour
     [Tooltip("The bullet decay time for flamethrower during crazy mode")]
     public float flamethrowerCrazyDecay;
 
-    //Flammenwerfer properties
-    public bool flamethrowerActive;
-    public float flamethrowerDuration;
-
     Vector2 movement;
     Vector2 mousePos;
 
@@ -145,7 +141,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag(flamethrowerPickupTag))
         {
             weaponMode = 3;
-            availableAmmo = 60;
+            availableAmmo = 1000;
             Destroy(collision.gameObject);
         }
     }
@@ -296,7 +292,7 @@ public class PlayerController : MonoBehaviour
     }
     void FlamethrowerShooting()
     {
-        if (isShoot && flamethrowerActive)
+        if (isShoot)
         {
             if (isCrazy)
             {
@@ -314,7 +310,7 @@ public class PlayerController : MonoBehaviour
                 rb.AddForce(flamethrowerWeapon.up * fireForce, ForceMode2D.Impulse);
                 fireObject.GetComponent<Bullet>().startDecay(flamethrowerNormalDecay);
             }
-            
+            availableAmmo--;
         }
     }
 
