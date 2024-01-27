@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
     bool isShoot;
 
     //Crazy System
-    public float crazyDuration;
+    public static float crazyDuration = 30f;
     public static bool isCrazy;
 
     public GameObject ammoCounter;
@@ -129,11 +129,16 @@ public class PlayerController : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag(enemyTag)){
-            //Die
-            Debug.Log("Dead");
-            Destroy(gameObject);
+        if (!isCrazy)
+        {
+            if (collision.gameObject.CompareTag(enemyTag))
+            {
+                //Die
+                Debug.Log("Dead");
+                Destroy(gameObject);
+            }
         }
+        
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -265,7 +270,6 @@ public class PlayerController : MonoBehaviour
                     gunClip.Play();
                     Rigidbody2D rb1 = bulletObject1.GetComponent<Rigidbody2D>();
                     rb1.AddForce(item.up * bulletForce, ForceMode2D.Impulse);
-                    availableAmmo--;
                 }
             }
             else
@@ -298,7 +302,6 @@ public class PlayerController : MonoBehaviour
                     bulletObject.GetComponent<Bullet>().startDecay(shotgunCrazyDecay);
 
                 }
-                availableAmmo--;
             }
             else
             {
@@ -335,14 +338,14 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-         
                 GameObject fireObject = Instantiate(fire, flamethrowerWeapon.position, flamethrowerWeapon.rotation);
                 fireObject.transform.localScale = new Vector3(0.5f, 0.5f, 1);
                 Rigidbody2D rb = fireObject.GetComponent<Rigidbody2D>();
                 rb.AddForce(flamethrowerWeapon.up * fireForce, ForceMode2D.Impulse);
                 fireObject.GetComponent<FireBullet>().startDecay(flamethrowerNormalDecay);
+                availableAmmo--;
             }
-            availableAmmo--;
+            
         }
     }
 

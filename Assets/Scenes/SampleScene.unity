@@ -1925,6 +1925,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1731705625}
     - target: {fileID: 3275541338602337834, guid: a14401e8d2450184d889fa63c05fb3b8, type: 3}
+      propertyPath: crazyDuration
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3275541338602337834, guid: a14401e8d2450184d889fa63c05fb3b8, type: 3}
       propertyPath: crazyCircleFill
       value: 
       objectReference: {fileID: 0}
