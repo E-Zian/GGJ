@@ -208,6 +208,8 @@ MonoBehaviour:
   shotgunCrazyDecay: 0.4
   flamethrowerNormalDecay: 0.5
   flamethrowerCrazyDecay: 1
+  crazyCircleFill: {fileID: 0}
+  crazyDuration: 0
   ammoCounter: {fileID: 0}
 --- !u!212 &1696714764994445720
 SpriteRenderer:
