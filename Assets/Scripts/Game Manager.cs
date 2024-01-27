@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     public static List<GameObject> activeSpawners;
     public static float currentSpawnedEnemy;
     public float maxSpawnedEnemy;
+    public float maxEnemyNormal;
+    public float maxEnemyCrazy;
     public int enemySpawnGroupSize;
     public int specialCounter;
     public int killToSpawnSpecial;
@@ -28,6 +30,12 @@ public class GameManager : MonoBehaviour
 
     public AudioSource bgm;
 
+    //Boolean to run once
+    public bool runOnce;
+
+    //Post-processing
+    public GameObject postVolume;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +44,8 @@ public class GameManager : MonoBehaviour
         bgm.loop = true;
         bgm.Play();
         specialCounter = 0;
+        runOnce = false;
+        maxSpawnedEnemy = maxEnemyNormal;
     }
 
     // Update is called once per frame
@@ -67,5 +77,26 @@ public class GameManager : MonoBehaviour
             //CHANGE SCENE
         }
         enemiesLeftText.text = remainingEnemyAmt.ToString();
+
+        //Player Crazy Mode
+        if (PlayerController.isCrazy)
+        {
+            maxSpawnedEnemy = maxEnemyCrazy;
+            if (!runOnce)
+            {
+                StartCoroutine(crazyMode());
+                postVolume.SetActive(true);
+                runOnce = true;
+            }
+        }
+    }
+
+    IEnumerator crazyMode()
+    {
+        yield return new WaitForSeconds(PlayerController.crazyDuration - 10);
+        maxSpawnedEnemy = maxEnemyNormal;
+        yield return new WaitForSeconds(10f);
+        postVolume.SetActive(false);
+        runOnce = false;
     }
 }
