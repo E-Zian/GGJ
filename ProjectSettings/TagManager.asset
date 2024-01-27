@@ -9,6 +9,7 @@ TagManager:
   - RiflePickup
   - FlamethrowerPickup
   - Enemy
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX

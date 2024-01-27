@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Rendering;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -29,6 +31,9 @@ public class PlayerController : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     //Ammo count stuff
     public float availableAmmo;
+    public TextMeshProUGUI ammoCountText;
+
+    //Bullet Properties
     public float bulletForce;
     public float fireForce;
     public float moveSpeed;
@@ -43,6 +48,10 @@ public class PlayerController : MonoBehaviour
     [Tooltip("The bullet decay time for flamethrower during crazy mode")]
     public float flamethrowerCrazyDecay;
 
+    //Flammenwerfer properties
+    public bool flamethrowerActive;
+    public float flamethrowerDuration;
+
     Vector2 movement;
     Vector2 mousePos;
 
@@ -56,6 +65,8 @@ public class PlayerController : MonoBehaviour
     
     bool isShoot;
     bool isCrazy = false;
+
+    public GameObject ammoCounter;
 
     private void Start()
     {
@@ -87,6 +98,16 @@ public class PlayerController : MonoBehaviour
                 FlamethrowerShooting();
             }
         }
+
+        if (ammoCounter.activeInHierarchy)
+        {
+            ammoCountText.text = availableAmmo.ToString();
+        }
+        if (availableAmmo <= 0)
+        {
+            weaponMode = 0;
+            ammoCounter.SetActive(false);
+        }
         
         
     }
@@ -111,12 +132,14 @@ public class PlayerController : MonoBehaviour
         {
             weaponMode = 1;
             availableAmmo = 50;
+            ammoCounter.SetActive(true);
             Destroy(collision.gameObject);
         }
         if (collision.gameObject.CompareTag(shotgunPickupTag))
         {
             weaponMode = 2;
             availableAmmo = 35;
+            ammoCounter.SetActive(true);
             Destroy(collision.gameObject);
         }
         if (collision.gameObject.CompareTag(flamethrowerPickupTag))
@@ -222,6 +245,7 @@ public class PlayerController : MonoBehaviour
                     GameObject bulletObject1 = Instantiate(bullet, item.position, item.rotation);
                     Rigidbody2D rb1 = bulletObject1.GetComponent<Rigidbody2D>();
                     rb1.AddForce(item.up * bulletForce, ForceMode2D.Impulse);
+                    availableAmmo--;
                 }
             }
             else
@@ -230,6 +254,7 @@ public class PlayerController : MonoBehaviour
                 GameObject bulletObject = Instantiate(bullet, rifleWeapon.position, rifleWeapon.rotation);
                 Rigidbody2D rb = bulletObject.GetComponent<Rigidbody2D>();
                 rb.AddForce(rifleWeapon.up * bulletForce, ForceMode2D.Impulse);
+                availableAmmo--;
             }
            
         }
@@ -250,6 +275,7 @@ public class PlayerController : MonoBehaviour
                     bulletObject.GetComponent<Bullet>().startDecay(shotgunCrazyDecay);
 
                 }
+                availableAmmo--;
             }
             else
             {
@@ -263,13 +289,14 @@ public class PlayerController : MonoBehaviour
                     bulletObject.GetComponent<Bullet>().startDecay(shotgunNormalDecay);
 
                 }
+                availableAmmo--;
             }
 
         }
     }
     void FlamethrowerShooting()
     {
-        if (isShoot)
+        if (isShoot && flamethrowerActive)
         {
             if (isCrazy)
             {

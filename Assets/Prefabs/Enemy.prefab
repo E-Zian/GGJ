@@ -195,6 +195,7 @@ MonoBehaviour:
   riflePickup: {fileID: 2308868224609413856, guid: 2d311995068b69544aa52e0c95eb8702, type: 3}
   shotgunPickup: {fileID: 5557786246912832659, guid: 021b0fee898bb8346b7a07bd46932219, type: 3}
   flamethrowerPickup: {fileID: 8231412922478184320, guid: 076540fe89884ea45b96a6374fd6954f, type: 3}
+  bulletDamage: 50
 --- !u!58 &3259902322429313983
 CircleCollider2D:
   m_ObjectHideFlags: 0

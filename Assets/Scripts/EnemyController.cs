@@ -20,6 +20,7 @@ public class EnemyController : MonoBehaviour
     public GameObject riflePickup;
     public GameObject shotgunPickup;
     public GameObject flamethrowerPickup;
+    public float bulletDamage;
 
     private string playerTag = "Player";
     private string bulletTag = "Bullet";
@@ -99,7 +100,7 @@ public class EnemyController : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag(bulletTag))
         {
-            ApplyDamage(10);
+            ApplyDamage(bulletDamage);
         }
     }
 
@@ -115,7 +116,7 @@ public class EnemyController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(bulletTag))
         {
-            ApplyDamage(10);
+            ApplyDamage(bulletDamage);
         }
     }
 
