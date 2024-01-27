@@ -34,6 +34,7 @@ public class EnemyController : MonoBehaviour
 
     //GameObject
     public GameObject pickups;
+    public GameObject corpse;
 
     // Start is called before the first frame update
     void Start()
@@ -104,6 +105,8 @@ public class EnemyController : MonoBehaviour
             {
                 crazyMeter.clownMeterValue += 2;
             }
+            GameObject corpSe = Instantiate(corpse, this.transform.position, Quaternion.identity);
+            GameManager.enemyCorpsePool.Add(corpSe);
             Destroy(gameObject);
         }
 

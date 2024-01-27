@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
 
     //Object pools
     public static List<GameObject> droppedWeaponPool;
+    public static List<GameObject> enemyCorpsePool;
 
     //Strings
     private string enemyTag = "Enemy";
@@ -60,6 +61,7 @@ public class GameManager : MonoBehaviour
         inFinalStage = false;
         maxSpawnedEnemy = maxEnemyNormal;
         droppedWeaponPool = new List<GameObject>();
+        enemyCorpsePool = new List<GameObject>();
     }
 
     // Update is called once per frame
@@ -155,7 +157,12 @@ public class GameManager : MonoBehaviour
             Destroy(droppedWeaponPool[0].gameObject);
             droppedWeaponPool.RemoveAt(0);
         }
-        Debug.Log(droppedWeaponPool.Count);
+        if (enemyCorpsePool.Count > 20)
+        {
+            Destroy(enemyCorpsePool[0].gameObject);
+            enemyCorpsePool.RemoveAt(0);
+        }
+        Debug.Log(enemyCorpsePool.Count);
     }
 
     IEnumerator crazyMode()

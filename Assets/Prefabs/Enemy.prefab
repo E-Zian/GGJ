@@ -201,6 +201,7 @@ MonoBehaviour:
   isOnFire: 0
   fireDoTDecay: 10
   pickups: {fileID: 0}
+  corpse: {fileID: 8449370816584373901, guid: 68207a2158b59344a924042342c08276, type: 3}
 --- !u!58 &3259902322429313983
 CircleCollider2D:
   m_ObjectHideFlags: 0
