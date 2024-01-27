@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     //Enemy Amount Settings and Variables
     public static float remainingEnemyAmt;
     public static float startingEnemyAmt;
+    public static int enemiesLeft;
     public float enemyAmount;
-
+    public TextMeshProUGUI enemiesLeftText;
     //Enemy Spawn & Spawners
     public List<GameObject> spawners;
     public static List<GameObject> activeSpawners;
@@ -22,6 +24,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        enemiesLeft = 5000;
         remainingEnemyAmt = startingEnemyAmt = enemyAmount;
         activeSpawners = spawners;
         bgm.loop = true;
@@ -42,5 +45,6 @@ public class GameManager : MonoBehaviour
             Instantiate(enemy, activeSpawners[randomSpawn].transform.position, Quaternion.identity);
             currentSpawnedEnemy++;
         }
+        enemiesLeftText.text = enemiesLeft.ToString();
     }
 }

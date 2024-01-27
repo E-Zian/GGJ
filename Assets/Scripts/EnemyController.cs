@@ -95,6 +95,7 @@ public class EnemyController : MonoBehaviour
             PlayerController.crazyCharge += 0.01f;
             GameManager.currentSpawnedEnemy--;
             Destroy(gameObject);
+            GameManager.enemiesLeft--;
         }
     }
 
@@ -164,6 +165,7 @@ public class EnemyController : MonoBehaviour
     }
     private void OnDestroy()
     {
+        
         Instantiate(enemy, transform.position + transform.forward * 2, transform.rotation);
         Instantiate(enemy, transform.position + transform.right * 2, transform.rotation);
     }
