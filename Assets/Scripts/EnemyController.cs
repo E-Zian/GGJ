@@ -22,8 +22,13 @@ public class EnemyController : MonoBehaviour
     public GameObject flamethrowerPickup;
     public float bulletDamage;
 
+    //DoT stuff
+    public bool isOnFire;
+    public float fireDoTDecay;
+
     private string playerTag = "Player";
     private string bulletTag = "Bullet";
+    private string fireBulletTag = "FireBullet";
     private AIDestinationSetter _aIDestinationSetter;
 
     // Start is called before the first frame update
@@ -75,18 +80,20 @@ public class EnemyController : MonoBehaviour
                 switch (whatToDrop)
                 {
                     case 1:
-                        Instantiate(riflePickup, this.transform.position, Quaternion.identity);
+                        Instantiate(riflePickup, new Vector3(this.transform.position.x, this.transform.position.y, 0), Quaternion.identity);
                         break;
                     case 2:
-                        Instantiate(shotgunPickup, this.transform.position, Quaternion.identity);
+                        Instantiate(shotgunPickup, new Vector3(this.transform.position.x, this.transform.position.y, 0), Quaternion.identity);
                         break;
                     case 3:
-                        Instantiate(flamethrowerPickup, this.transform.position, Quaternion.identity);
+                        Instantiate(flamethrowerPickup, new Vector3(this.transform.position.x, this.transform.position.y, 0), Quaternion.identity);
                         break;
                     default:
                         break;
                 }
             }
+            PlayerController.crazyCharge += 0.01f;
+            GameManager.currentSpawnedEnemy--;
             Destroy(gameObject);
         }
     }
@@ -131,6 +138,30 @@ public class EnemyController : MonoBehaviour
         _aIDestinationSetter.target = _player.transform;
     }
 
+    public void startKenaFire()
+    {
+        if (!isOnFire)
+        {
+            isOnFire = true;
+            StartCoroutine(kenaFire());
+            StartCoroutine(fireDecay());
+        }
+    }
+
+    IEnumerator kenaFire()
+    {
+        while (isOnFire)
+        {
+            ApplyDamage(20);
+            yield return new WaitForSeconds(1f);
+        }
+    }
+
+    IEnumerator fireDecay()
+    {
+        yield return new WaitForSeconds(fireDoTDecay);
+        isOnFire = false;
+    }
     private void OnDestroy()
     {
         Instantiate(enemy, transform.position + transform.forward * 2, transform.rotation);

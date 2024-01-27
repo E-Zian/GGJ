@@ -64,6 +64,11 @@ public class PlayerController : MonoBehaviour
     float fireElapsedTime = 0;
     
     bool isShoot;
+
+    //Crazy System
+    public Image crazyCircleFill;
+    public static float crazyCharge;
+    public float crazyDuration;
     bool isCrazy = false;
 
     public GameObject ammoCounter;
@@ -113,7 +118,10 @@ public class PlayerController : MonoBehaviour
             weaponMode = 0;
             ammoCounter.SetActive(false);
         }
-        
+        if (crazyCircleFill.gameObject.activeInHierarchy)
+        {
+            crazyCircleFill.fillAmount = crazyCharge;
+        }
         
     }
     private void FixedUpdate()
@@ -151,6 +159,7 @@ public class PlayerController : MonoBehaviour
         {
             weaponMode = 3;
             availableAmmo = 1000;
+            ammoCounter.SetActive(true);
             Destroy(collision.gameObject);
         }
     }
@@ -159,10 +168,13 @@ public class PlayerController : MonoBehaviour
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (Input.GetKeyDown("space"))
+        //Enter Crazy Mode
+        if (Input.GetKeyDown("space") && crazyCharge == 1)
         {
-            isCrazy = !isCrazy;
-        }
+            isCrazy = true;
+            StartCoroutine(crazyMode());
+        } 
+
         //if not crazy
         if(!isCrazy)
         {
@@ -321,7 +333,7 @@ public class PlayerController : MonoBehaviour
                 fireObject.transform.localScale = new Vector3(1, 1, 1);
                 Rigidbody2D rb = fireObject.GetComponent<Rigidbody2D>();
                 rb.AddForce(flamethrowerWeapon.up * fireForce, ForceMode2D.Impulse);
-                fireObject.GetComponent<Bullet>().startDecay(flamethrowerNormalDecay);
+                fireObject.GetComponent<FireBullet>().startDecay(flamethrowerNormalDecay);
             }
             else
             {
@@ -330,10 +342,16 @@ public class PlayerController : MonoBehaviour
                 fireObject.transform.localScale = new Vector3(0.5f, 0.5f, 1);
                 Rigidbody2D rb = fireObject.GetComponent<Rigidbody2D>();
                 rb.AddForce(flamethrowerWeapon.up * fireForce, ForceMode2D.Impulse);
-                fireObject.GetComponent<Bullet>().startDecay(flamethrowerNormalDecay);
+                fireObject.GetComponent<FireBullet>().startDecay(flamethrowerNormalDecay);
             }
             availableAmmo--;
         }
+    }
+
+    IEnumerator crazyMode()
+    {
+        yield return new WaitForSeconds(crazyDuration);
+        isCrazy = false;
     }
 
     //void LookAtMouse()
