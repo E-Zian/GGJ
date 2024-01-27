@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     public GameObject APBullet;
     public GameObject fire;
 
-    public SpriteRenderer spriteRenderer;
+    private SpriteRenderer spriteRenderer;
     //Ammo count stuff
     public float availableAmmo;
     public TextMeshProUGUI ammoCountText;
@@ -70,6 +70,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         availableAmmo = 0;
     }
     private void Update()
