@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
     string riflePickupTag = "RiflePickup";
     string shotgunPickupTag = "ShotgunPickup";
     string flamethrowerPickupTag = "FlamethrowerPickup";
+    string spawnerTag = "SpawnPoint";
     string enemyTag = "Enemy";
 
     float fireElapsedTime = 0;
