@@ -188,17 +188,17 @@ MonoBehaviour:
   - {fileID: 4688209996341365741}
   bullet: {fileID: 1345732276045134113, guid: ad6ffe2e62890814ebc6ff2c118ce315, type: 3}
   APBullet: {fileID: 3894604013692092374, guid: f3060f2add20b8d4ca8467b8d195feaa, type: 3}
-  fire: {fileID: 0}
+  fire: {fileID: 5818683346452721532, guid: c8ea9ea2f96f7b14a85f67bca5d3a21c, type: 3}
   availableAmmo: 0
   bulletForce: 20
-  fireForce: 0
+  fireForce: 5
   moveSpeed: 0.05
   shootDelay: 0.2
   pistolDelay: 0.8
   shotgunNormalDecay: 0.3
   shotgunCrazyDecay: 0.4
-  flamethrowerNormalDecay: 0
-  flamethrowerCrazyDecay: 0
+  flamethrowerNormalDecay: 0.5
+  flamethrowerCrazyDecay: 1
 --- !u!212 &1696714764994445720
 SpriteRenderer:
   m_ObjectHideFlags: 0

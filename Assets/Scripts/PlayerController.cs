@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
@@ -37,6 +38,7 @@ public class PlayerController : MonoBehaviour
     public float flamethrowerCrazyDecay;
 
     Vector2 movement;
+    Vector2 mousePos;
 
     string riflePickupTag = "RiflePickup";
     string shotgunPickupTag = "ShotgunPickup";
@@ -47,7 +49,7 @@ public class PlayerController : MonoBehaviour
     float fireElapsedTime = 0;
     
     bool isShoot;
-    bool isCrazy;
+    bool isCrazy = false;
 
     private void Start()
     {
@@ -57,7 +59,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!pause.isPaused) {
             Inputs();
-            LookAtMouse();
+           
             if (weaponMode == 0)
             {
                 PistolShooting();
@@ -81,6 +83,9 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         rb.MovePosition(rb.position + movement * moveSpeed);
+        Vector2 lookDir = mousePos - rb.position;
+        float angle = Mathf.Atan2(lookDir.y, lookDir.x)* Mathf.Rad2Deg - 90f;
+        rb.rotation = angle;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -115,6 +120,7 @@ public class PlayerController : MonoBehaviour
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
+        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         if (Input.GetKeyDown("space"))
         {
             isCrazy = !isCrazy;
@@ -275,9 +281,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void LookAtMouse()
-    {
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        transform.up = mousePosition - new Vector2(transform.position.x, transform.position.y);
-    }
+    //void LookAtMouse()
+    //{
+    //    Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    //    transform.up = mousePosition - new Vector2(transform.position.x, transform.position.y);
+    //}
 }
