@@ -52795,13 +52795,13 @@ MonoBehaviour:
   - {fileID: 2013121004}
   - {fileID: 1298958833}
   - {fileID: 1108316422}
-  maxSpawnedEnemy: 50
+  maxSpawnedEnemy: 70
   enemySpawnGroupSize: 0
   specialCounter: 0
-  killToSpawnSpecial: 0
+  killToSpawnSpecial: 1000
   enemy: {fileID: 496463865509792649, guid: 23bfd522b10ea8a46a4624d2d4c08f3d, type: 3}
-  fatEnemy: {fileID: 0}
-  runnerEnemy: {fileID: 0}
+  fatEnemy: {fileID: 7195637630327472470, guid: 2a4b9e69f36e32040bfffa3957611ef6, type: 3}
+  runnerEnemy: {fileID: 6929570954489811840, guid: b79364625384d4244a531d2beadf3335, type: 3}
   bgm: {fileID: 1975116357}
 --- !u!4 &1975116356
 Transform:
