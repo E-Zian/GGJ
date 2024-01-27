@@ -66,10 +66,8 @@ public class PlayerController : MonoBehaviour
     bool isShoot;
 
     //Crazy System
-    public Image crazyCircleFill;
-    public static float crazyCharge;
     public float crazyDuration;
-    bool isCrazy = false;
+    public static bool isCrazy;
 
     public GameObject ammoCounter;
 
@@ -77,6 +75,7 @@ public class PlayerController : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         availableAmmo = 0;
+        isCrazy = false;
     }
     private void Update()
     {
@@ -166,11 +165,12 @@ public class PlayerController : MonoBehaviour
         movement.y = Input.GetAxisRaw("Vertical");
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         //Enter Crazy Mode
-        if (Input.GetKeyDown("space") && crazyCharge >= 1.0f)
+        if (Input.GetKeyDown("space") && crazyMeter.clownMeterValue >= 100.0f)
         {
             isCrazy = true;
-            crazyCharge = 0.0f;
+            crazyMeter.clownMeterValue = 0;
             StartCoroutine(crazyMode());
+            Debug.Log("Crazy");
         } 
 
         //if not crazy

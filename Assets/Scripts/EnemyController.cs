@@ -9,6 +9,7 @@ public class EnemyController : MonoBehaviour
     public GameObject _player;
     public GameObject enemy;
     public float moveSpeed;
+    public float crazyMoveSpeed;
 
     public float health;
     public float healthModifier;
@@ -36,7 +37,6 @@ public class EnemyController : MonoBehaviour
     {
         //Pathfinding AI Initial Setting
         _player = GameObject.FindGameObjectWithTag(playerTag);
-        GetComponent <AIPath>().maxSpeed = moveSpeed;
         _aIDestinationSetter = GetComponent<AIDestinationSetter>();
         _aIDestinationSetter.target = _player.transform;
 
@@ -92,11 +92,19 @@ public class EnemyController : MonoBehaviour
                         break;
                 }
             }
-            PlayerController.crazyCharge += 0.01f;
             GameManager.currentSpawnedEnemy--;
             GameManager.remainingEnemyAmt--;
-            crazyMeter.clownMeterValue++;
+            crazyMeter.clownMeterValue+= 2;
             Destroy(gameObject);
+        }
+
+        if (PlayerController.isCrazy)
+        {
+            GetComponent<AIPath>().maxSpeed = crazyMoveSpeed;
+        }
+        else
+        {
+            GetComponent<AIPath>().maxSpeed = moveSpeed;
         }
     }
 
