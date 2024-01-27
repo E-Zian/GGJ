@@ -13,6 +13,10 @@ PrefabInstance:
       value: Enemy Fat
       objectReference: {fileID: 0}
     - target: {fileID: 1178924984431978631, guid: 23bfd522b10ea8a46a4624d2d4c08f3d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4a741c967e4c02342858365b6f31a917, type: 3}
+    - target: {fileID: 1178924984431978631, guid: 23bfd522b10ea8a46a4624d2d4c08f3d, type: 3}
       propertyPath: m_Color.b
       value: 0
       objectReference: {fileID: 0}
@@ -35,6 +39,18 @@ PrefabInstance:
     - target: {fileID: 1381870661151610823, guid: 23bfd522b10ea8a46a4624d2d4c08f3d, type: 3}
       propertyPath: maxHealth
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2393552724203519412, guid: 23bfd522b10ea8a46a4624d2d4c08f3d, type: 3}
+      propertyPath: slowdownDistance
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2393552724203519412, guid: 23bfd522b10ea8a46a4624d2d4c08f3d, type: 3}
+      propertyPath: endReachedDistance
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3259902322429313983, guid: 23bfd522b10ea8a46a4624d2d4c08f3d, type: 3}
+      propertyPath: m_Radius
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7216150997859371419, guid: 23bfd522b10ea8a46a4624d2d4c08f3d, type: 3}
       propertyPath: m_LocalScale.x

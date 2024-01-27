@@ -10,6 +10,7 @@ TagManager:
   - FlamethrowerPickup
   - Enemy
   - SpawnPoint
+  - FireBullet
   layers:
   - Default
   - TransparentFX

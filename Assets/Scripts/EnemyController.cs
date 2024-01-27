@@ -73,8 +73,8 @@ public class EnemyController : MonoBehaviour
         {
             //Drop RNG
             //Current drop rate is 1/10
-            int dropChance = Random.Range(1, 11);
-            if (dropChance >= 2)
+            float dropChance = Random.Range(1.0f, 11.0f);
+            if (dropChance <= 3f)
             {
                 int whatToDrop = Random.Range(1, 4);
                 switch (whatToDrop)
@@ -94,9 +94,9 @@ public class EnemyController : MonoBehaviour
             }
             PlayerController.crazyCharge += 0.01f;
             GameManager.currentSpawnedEnemy--;
+            GameManager.remainingEnemyAmt--;
             crazyMeter.clownMeterValue++;
             Destroy(gameObject);
-            GameManager.remainingEnemyAmt--;
         }
     }
 
@@ -154,7 +154,7 @@ public class EnemyController : MonoBehaviour
     {
         while (isOnFire)
         {
-            ApplyDamage(20);
+            ApplyDamage(50);
             yield return new WaitForSeconds(1f);
         }
     }

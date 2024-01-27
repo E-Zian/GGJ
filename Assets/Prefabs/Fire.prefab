@@ -13,9 +13,11 @@ GameObject:
   - component: {fileID: 4642587243513726421}
   - component: {fileID: 8819847464119028029}
   - component: {fileID: -8543369405765604112}
-  m_Layer: 3
+  - component: {fileID: -3693349506268168505}
+  - component: {fileID: 5453179591354966771}
+  m_Layer: 0
   m_Name: Fire
-  m_TagString: Untagged
+  m_TagString: FireBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -77,7 +79,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 330d9c52ba0d01f40940df394d0b718f, type: 3}
-  m_Color: {r: 1, g: 0.42482007, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

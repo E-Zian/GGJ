@@ -166,9 +166,10 @@ public class PlayerController : MonoBehaviour
         movement.y = Input.GetAxisRaw("Vertical");
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         //Enter Crazy Mode
-        if (Input.GetKeyDown("space") && crazyCharge == 1)
+        if (Input.GetKeyDown("space") && crazyCharge >= 1.0f)
         {
             isCrazy = true;
+            crazyCharge = 0.0f;
             StartCoroutine(crazyMode());
         } 
 
