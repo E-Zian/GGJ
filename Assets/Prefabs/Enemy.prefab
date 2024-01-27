@@ -185,10 +185,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3dde80937eb67d408de9d8cde4604b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 0}
+  _player: {fileID: 5256911781357788575, guid: a14401e8d2450184d889fa63c05fb3b8, type: 3}
+  enemy: {fileID: 496463865509792649}
   moveSpeed: 2
   health: 0
   healthModifier: 0
+  maxHealth: 100
   modifierStep: 0.1
   riflePickup: {fileID: 2308868224609413856, guid: 2d311995068b69544aa52e0c95eb8702, type: 3}
   shotgunPickup: {fileID: 5557786246912832659, guid: 021b0fee898bb8346b7a07bd46932219, type: 3}

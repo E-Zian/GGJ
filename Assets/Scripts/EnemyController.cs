@@ -7,10 +7,12 @@ public class EnemyController : MonoBehaviour
 {
 
     public GameObject _player;
+    public GameObject enemy;
     public float moveSpeed;
 
     public float health;
     public float healthModifier;
+    public float maxHealth;
     [Tooltip("Please use 0.1 as step reference")]
     public float modifierStep;
 
@@ -55,7 +57,7 @@ public class EnemyController : MonoBehaviour
             healthModifier += modifierStep * 4;
         }
 
-        health = 100f * healthModifier;         //Set health
+        health = maxHealth * healthModifier;         //Set health
     }
 
     // Update is called once per frame
@@ -126,5 +128,11 @@ public class EnemyController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         _aIDestinationSetter.target = _player.transform;
+    }
+
+    private void OnDestroy()
+    {
+        Instantiate(enemy, transform.position + transform.forward * 2, transform.rotation);
+        Instantiate(enemy, transform.position + transform.right * 2, transform.rotation);
     }
 }
