@@ -165,7 +165,6 @@ public class GameManager : MonoBehaviour
             Destroy(enemyCorpsePool[0].gameObject);
             enemyCorpsePool.RemoveAt(0);
         }
-        Debug.Log(enemyCorpsePool.Count);
     }
 
     IEnumerator crazyMode()

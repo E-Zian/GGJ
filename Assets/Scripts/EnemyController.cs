@@ -12,7 +12,6 @@ public class EnemyController : MonoBehaviour
     public float crazyMoveSpeed;
 
     public float health;
-    public float healthModifier;
     public float maxHealth;
     [Tooltip("Please use 0.1 as step reference")]
     public float modifierStep;
@@ -32,9 +31,13 @@ public class EnemyController : MonoBehaviour
     private string fireBulletTag = "FireBullet";
     private AIDestinationSetter _aIDestinationSetter;
 
-    //GameObject
-    public GameObject pickups;
+    //GameObject to be used by object pooling
+    private GameObject pickups;
+    [Tooltip("This is also used to hold the corpse gameobject")]
     public GameObject corpse;
+
+    //String
+    private string fatEnemyName = "Enemy Fat";
 
     // Start is called before the first frame update
     void Start()
@@ -44,30 +47,7 @@ public class EnemyController : MonoBehaviour
         _aIDestinationSetter = GetComponent<AIDestinationSetter>();
         _aIDestinationSetter.target = _player.transform;
 
-        //Health System
-        //Health Modifier definition
-        if (GameManager.remainingEnemyAmt <= GameManager.startingEnemyAmt)
-        {
-            healthModifier = 1.0f;
-        }
-        else if (GameManager.remainingEnemyAmt < GameManager.startingEnemyAmt - 1000)
-        {
-            healthModifier += modifierStep;
-        }
-        else if (GameManager.remainingEnemyAmt < GameManager.startingEnemyAmt - 2000)
-        {
-            healthModifier += modifierStep * 2;
-        }
-        else if (GameManager.remainingEnemyAmt < GameManager.startingEnemyAmt - 3000)
-        {
-            healthModifier += modifierStep * 3;
-        }
-        else if (GameManager.remainingEnemyAmt < GameManager.startingEnemyAmt - 4000)
-        {
-            healthModifier += modifierStep * 4;
-        }
-
-        health = maxHealth * healthModifier;         //Set health
+        health = maxHealth;    //Set health
     }
 
     // Update is called once per frame
@@ -193,8 +173,11 @@ public class EnemyController : MonoBehaviour
     }
     private void OnDestroy()
     {
-        
-        Instantiate(enemy, transform.position + transform.forward * 2, transform.rotation);
-        Instantiate(enemy, transform.position + transform.right * 2, transform.rotation);
+        //Definetely not how you do this, but, ain't nobody got time for that
+        if (this.gameObject.name == fatEnemyName)
+        {
+            Instantiate(enemy, transform.position + transform.forward * 2, transform.rotation);
+            Instantiate(enemy, transform.position + transform.right * 2, transform.rotation);
+        }
     }
 }
