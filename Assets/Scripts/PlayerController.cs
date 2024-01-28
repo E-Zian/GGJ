@@ -242,7 +242,7 @@ public class PlayerController : MonoBehaviour
             {
                 //pistol
                 case 0:
-                    isShoot = Input.GetButtonDown("Fire1");
+                    isShoot = Input.GetButton("Fire1");
                     break;
                 //rifle
                 case 1:
@@ -270,12 +270,12 @@ public class PlayerController : MonoBehaviour
             
             if (isCrazy)
             {
-                fireElapsedTime = 0;
+                fireElapsedTime = 0.1f;
                 GameObject bulletObject = Instantiate(APBullet, pistolWeapon.position, pistolWeapon.rotation);
                 Rigidbody2D rb = bulletObject.GetComponent<Rigidbody2D>();
                 rb.AddForce(pistolWeapon.up * bulletForce, ForceMode2D.Impulse);
                 gunClip.Play();
-                bulletObject.GetComponent<Bullet>().startDecay(0.4f);
+                bulletObject.GetComponent<Bullet>().startDecay(0.8f);
             }
             else
             {
@@ -325,7 +325,7 @@ public class PlayerController : MonoBehaviour
             
             if (isCrazy)
             {
-                fireElapsedTime = 0;
+                fireElapsedTime = 0.2f;
                 foreach (var item in shotgun)
                 {
                     GameObject bulletObject = Instantiate(bullet, item.position, Quaternion.identity);
@@ -338,7 +338,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                fireElapsedTime = 0;
+                fireElapsedTime = 0f;
 
                 foreach (var item in shotgun)
                 {
@@ -375,7 +375,7 @@ public class PlayerController : MonoBehaviour
                 fireObject.transform.localScale = new Vector3(0.5f, 0.5f, 1);
                 Rigidbody2D rb = fireObject.GetComponent<Rigidbody2D>();
                 rb.AddForce(flamethrowerWeapon.up * fireForce, ForceMode2D.Impulse);
-                fireObject.GetComponent<FireBullet>().startDecay(flamethrowerNormalDecay);
+                fireObject.GetComponent<FireBullet>().startDecay(flamethrowerNormalDecay * 2);
                 availableAmmo--;
             }
             

@@ -55,35 +55,38 @@ public class EnemyController : MonoBehaviour
     {
         if (health <= 0)
         {
-            //Drop RNG
-            //Current drop rate is 1/10
-            float dropChance = Random.Range(1.0f, 11.0f);
-            if (dropChance <= 3f)
+            if (!PlayerController.isCrazy)
             {
-                int whatToDrop = Random.Range(1, 4);
-                switch (whatToDrop)
+                //Drop RNG
+                //Current drop rate is 1/10
+                float dropChance = Random.Range(1.0f, 11.0f);
+                if (dropChance <= 3f)
                 {
-                    case 1:
-                        pickups = Instantiate(riflePickup, new Vector3(this.transform.position.x, this.transform.position.y, 0), Quaternion.identity);
-                        GameManager.droppedWeaponPool.Add(pickups);
-                        break;
-                    case 2:
-                        pickups = Instantiate(shotgunPickup, new Vector3(this.transform.position.x, this.transform.position.y, 0), Quaternion.identity);
-                        GameManager.droppedWeaponPool.Add(pickups);
-                        break;
-                    case 3:
-                        pickups = Instantiate(flamethrowerPickup, new Vector3(this.transform.position.x, this.transform.position.y, 0), Quaternion.identity);
-                        GameManager.droppedWeaponPool.Add(pickups);
-                        break;
-                    default:
-                        break;
+                    int whatToDrop = Random.Range(1, 4);
+                    switch (whatToDrop)
+                    {
+                        case 1:
+                            pickups = Instantiate(riflePickup, new Vector3(this.transform.position.x, this.transform.position.y, 0), Quaternion.identity);
+                            GameManager.droppedWeaponPool.Add(pickups);
+                            break;
+                        case 2:
+                            pickups = Instantiate(shotgunPickup, new Vector3(this.transform.position.x, this.transform.position.y, 0), Quaternion.identity);
+                            GameManager.droppedWeaponPool.Add(pickups);
+                            break;
+                        case 3:
+                            pickups = Instantiate(flamethrowerPickup, new Vector3(this.transform.position.x, this.transform.position.y, 0), Quaternion.identity);
+                            GameManager.droppedWeaponPool.Add(pickups);
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
             GameManager.currentSpawnedEnemy--;
             GameManager.remainingEnemyAmt--;
             if (!PlayerController.isCrazy)
             {
-                crazyMeter.clownMeterValue += 2;
+                crazyMeter.clownMeterValue += 100;
             }
             GameObject corpSe = Instantiate(corpse, this.transform.position, Quaternion.identity);
             GameManager.enemyCorpsePool.Add(corpSe);

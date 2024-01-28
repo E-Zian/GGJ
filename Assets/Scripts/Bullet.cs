@@ -6,22 +6,22 @@ public class Bullet : MonoBehaviour
 {
 
     public GameObject bloodSplatter;
+    private string enemyTag = "Enemy";
 
     void OnCollisionEnter2D(Collision2D other)
     {
         //Blood Splatter and Normal Calculation
         //Why does it not work properly?
         //Cause math
-        foreach (var contact in other.contacts)
+        if (other.gameObject.CompareTag(enemyTag))
         {
+            foreach (var contact in other.contacts)
+            {
+                float angle = Vector3.Angle(contact.point, contact.normal);
 
-            Debug.DrawRay(contact.point, contact.normal, Color.red, 2f);
+                Instantiate(bloodSplatter, other.gameObject.transform.position, Quaternion.Euler(new Vector3(angle, 90, -90)));
 
-            float angle = Vector3.Angle(contact.point, contact.normal);
-
-            Instantiate(bloodSplatter, other.transform.position, Quaternion.Euler(new Vector3(angle, 90, -90)));
-
-            Debug.Log("Hit normal: " + contact.normal);
+            }
         }
         Destroy(gameObject);
     }
