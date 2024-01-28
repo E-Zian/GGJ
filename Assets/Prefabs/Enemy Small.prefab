@@ -37,6 +37,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 496463865509792649, guid: 23bfd522b10ea8a46a4624d2d4c08f3d, type: 3}
     - target: {fileID: 1381870661151610823, guid: 23bfd522b10ea8a46a4624d2d4c08f3d, type: 3}
+      propertyPath: corpse
+      value: 
+      objectReference: {fileID: 7578352210104777763, guid: dfbe29f71526c5b499a10efef1ade61d, type: 3}
+    - target: {fileID: 1381870661151610823, guid: 23bfd522b10ea8a46a4624d2d4c08f3d, type: 3}
       propertyPath: health
       value: 0
       objectReference: {fileID: 0}

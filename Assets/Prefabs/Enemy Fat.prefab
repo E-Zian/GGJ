@@ -37,6 +37,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 496463865509792649, guid: 23bfd522b10ea8a46a4624d2d4c08f3d, type: 3}
     - target: {fileID: 1381870661151610823, guid: 23bfd522b10ea8a46a4624d2d4c08f3d, type: 3}
+      propertyPath: corpse
+      value: 
+      objectReference: {fileID: 5671058484588116750, guid: 4157e4e6badc13f4a94f3bd599d941a4, type: 3}
+    - target: {fileID: 1381870661151610823, guid: 23bfd522b10ea8a46a4624d2d4c08f3d, type: 3}
       propertyPath: _player
       value: 
       objectReference: {fileID: 5256911781357788575, guid: a14401e8d2450184d889fa63c05fb3b8, type: 3}
