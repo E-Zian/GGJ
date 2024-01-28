@@ -191,7 +191,6 @@ MonoBehaviour:
   moveSpeed: 1.4
   crazyMoveSpeed: 1.4
   health: 0
-  healthModifier: 0
   maxHealth: 100
   modifierStep: 0.1
   riflePickup: {fileID: 2308868224609413856, guid: 2d311995068b69544aa52e0c95eb8702, type: 3}
@@ -200,7 +199,6 @@ MonoBehaviour:
   bulletDamage: 50
   isOnFire: 0
   fireDoTDecay: 10
-  pickups: {fileID: 0}
   corpse: {fileID: 8449370816584373901, guid: 68207a2158b59344a924042342c08276, type: 3}
 --- !u!58 &3259902322429313983
 CircleCollider2D:
@@ -249,7 +247,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.0001
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1

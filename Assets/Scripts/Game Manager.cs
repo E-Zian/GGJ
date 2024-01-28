@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     public int specialCounter;
     public int killToSpawnSpecial;
     public GameObject[] finalEnemies;
-    public float finalEnemiesCount;
+    public static float finalEnemiesCount;
     public bool inFinalStage;
 
     //Prefabs
@@ -142,6 +142,7 @@ public class GameManager : MonoBehaviour
         {
             enemiesLeftText.text = remainingEnemyAmt.ToString();
         }
+        Debug.Log(finalEnemiesCount);
 
 
         //Player Crazy Mode
