@@ -9,6 +9,7 @@ public class Clownborder : MonoBehaviour
     public Sprite medium;
     public Sprite high;
     public Sprite full;
+    public GameObject spaceBar;
     public static int clownStatus = 0;
     private Image Border;
     void Start()
@@ -27,22 +28,25 @@ public class Clownborder : MonoBehaviour
                 if (!PlayerController.isCrazy) {
                     Border.sprite = low;
                 }
-            
+                spaceBar.SetActive(false);
                 break;
             case 1:
                 if (!PlayerController.isCrazy)
                 {
                     Border.sprite = medium;
                 }
+                spaceBar.SetActive(false);
                 break;
             case 2:
                 if (!PlayerController.isCrazy)
                 {
                     Border.sprite = high;
                 }
+                spaceBar.SetActive(false);
                 break;
             case 3:
                 Border.sprite = full;
+                spaceBar.SetActive(true);
                 break;
         }
     }
