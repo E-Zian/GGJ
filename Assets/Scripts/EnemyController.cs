@@ -84,9 +84,13 @@ public class EnemyController : MonoBehaviour
             }
             GameManager.currentSpawnedEnemy--;
             GameManager.remainingEnemyAmt--;
+            if (GameManager.remainingEnemyAmt <= 0)
+            {
+                GameManager.finalEnemiesCount--;
+            }
             if (!PlayerController.isCrazy)
             {
-                crazyMeter.clownMeterValue += 100;
+                crazyMeter.clownMeterValue += 2;
             }
             GameObject corpSe = Instantiate(corpse, this.transform.position, Quaternion.identity);
             GameManager.enemyCorpsePool.Add(corpSe);
