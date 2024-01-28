@@ -51,6 +51,9 @@ public class GameManager : MonoBehaviour
     //Sound
     public AudioSource bgmAudio;
 
+    //Cheat Menu
+    public GameObject cheatMenu;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -132,7 +135,6 @@ public class GameManager : MonoBehaviour
             {
                 finalEnemiesCount++;
             }
-            enemiesLeftText.text = finalEnemiesCount.ToString();
         }
         if (finalEnemiesCount <= 0 && inFinalStage)
         {
@@ -142,7 +144,10 @@ public class GameManager : MonoBehaviour
         {
             enemiesLeftText.text = remainingEnemyAmt.ToString();
         }
-        Debug.Log(finalEnemiesCount);
+        else
+        {
+            enemiesLeftText.text = finalEnemiesCount.ToString();
+        }
 
 
         //Player Crazy Mode
@@ -166,6 +171,16 @@ public class GameManager : MonoBehaviour
             Destroy(enemyCorpsePool[0].gameObject);
             enemyCorpsePool.RemoveAt(0);
         }
+
+        //Activate Cheat Menu
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            fillCrazyBar();
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            killAll();
+        }
     }
 
     IEnumerator crazyMode()
@@ -177,5 +192,25 @@ public class GameManager : MonoBehaviour
         postVolume.SetActive(false);
         bgmAudio.mute = false;
         runOnce = false;
+    }
+
+
+    //Cheat function
+    public void fillCrazyBar()
+    {
+        crazyMeter.clownMeterValue = 100f;
+    }
+
+    public void killAll()
+    {
+        if (remainingEnemyAmt > 200)
+        {
+            remainingEnemyAmt = 200;
+        }
+        GameObject[] allEnemy = GameObject.FindGameObjectsWithTag("Enemy");
+        for (int i = 0; i < allEnemy.Length - 1; i++)
+        {
+            allEnemy[i].GetComponent<EnemyController>().health = 0;
+        }
     }
 }

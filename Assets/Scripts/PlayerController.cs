@@ -370,7 +370,7 @@ public class PlayerController : MonoBehaviour
                 fireObject.transform.localScale = new Vector3(1, 1, 1);
                 Rigidbody2D rb = fireObject.GetComponent<Rigidbody2D>();
                 rb.AddForce(flamethrowerWeapon.up * fireForce, ForceMode2D.Impulse);
-                fireObject.GetComponent<FireBullet>().startDecay(flamethrowerNormalDecay);
+                fireObject.GetComponent<FireBullet>().startDecay(flamethrowerNormalDecay * 2);
             }
             else
             {
@@ -378,7 +378,7 @@ public class PlayerController : MonoBehaviour
                 fireObject.transform.localScale = new Vector3(0.5f, 0.5f, 1);
                 Rigidbody2D rb = fireObject.GetComponent<Rigidbody2D>();
                 rb.AddForce(flamethrowerWeapon.up * fireForce, ForceMode2D.Impulse);
-                fireObject.GetComponent<FireBullet>().startDecay(flamethrowerNormalDecay * 2);
+                fireObject.GetComponent<FireBullet>().startDecay(flamethrowerNormalDecay);
                 availableAmmo--;
             }
             
