@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
 
     public AudioSource gunClip;
     public AudioSource shotgunClip;
+    public AudioSource laughterClip;
 
     //Ammo count stuff
     public float availableAmmo;
@@ -81,10 +82,15 @@ public class PlayerController : MonoBehaviour
 
     public GameObject ammoCounter;
     public AudioSource doomMusic;
+
+    //Laughter Stuff
+    public static int laughCounter;
+
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         availableAmmo = 0;
+        laughCounter = 0;
         isCrazy = false;
         canvas.GetComponent<pause>().enabled = true;
     }
@@ -144,6 +150,11 @@ public class PlayerController : MonoBehaviour
         else
         {
             moveSpeed = 0.05f;
+        }
+        if (isCrazy && laughCounter >= 5)
+        {
+            laughCounter = 0;
+            laughterClip.Play();
         }
       
     }

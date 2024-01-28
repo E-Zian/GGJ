@@ -92,6 +92,10 @@ public class EnemyController : MonoBehaviour
             {
                 crazyMeter.clownMeterValue += 2;
             }
+            else
+            {
+                PlayerController.laughCounter++;
+            }
             GameObject corpSe = Instantiate(corpse, this.transform.position, Quaternion.identity);
             GameManager.enemyCorpsePool.Add(corpSe);
             Destroy(gameObject);
