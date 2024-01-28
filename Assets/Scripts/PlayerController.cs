@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
 
     public Rigidbody2D rb;
 
+    public GameObject canvas;
+
     public Image staminaBar;
     public float stamina, maxStamina;
     public float runCost = 20f;
@@ -84,7 +86,7 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         availableAmmo = 0;
         isCrazy = false;
-
+        canvas.GetComponent<pause>().enabled = true;
     }
     private void Update()
     {
@@ -160,6 +162,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Dead");
             Time.timeScale = 0f;
             gameOver.SetActive(true);
+            canvas.GetComponent<pause>().enabled = false;
             Destroy(gameObject);
         }
 
